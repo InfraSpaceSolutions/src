@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Inbox: Message: Delete");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int inbID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteAccount siteAccount = new SiteAccount();
+
+    WebDBContext db = new WebDBContext(); 
+
+    // get the target to delete
+    TblInboxMessages rs = db.TblInboxMessages.Single(target => target.InbID == inbID && target.InbToAccID == siteAccount.AccID);
+    
+    // Delete the record
+    db.TblInboxMessages.DeleteOnSubmit(rs);
+    db.SubmitChanges();
+
+    // redirect to the dashboard
+    Response.Redirect(Href("~/Account/Inbox?msg=Delete"), false);
+    return;
+}

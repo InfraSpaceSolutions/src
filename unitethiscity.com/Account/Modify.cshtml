@@ -1,0 +1,113 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Account Modify");
+
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteAccount siteAccount = new SiteAccount();
+
+    if (IsPost)
+    {
+        siteAccount.AccFName = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtAccFName"], ""), 50);
+        siteAccount.AccLName = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtAccLName"], ""), 50);
+        siteAccount.AccEMail = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtAccEMail"], ""), 128);
+        siteAccount.AccPhone = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtAccPhone"], ""), 50);
+        siteAccount.AccGender = WebConvert.Truncate(WebConvert.ToString(Request.Form["selAccGender"], ""), 20);
+        siteAccount.AccBirthdate = WebConvert.ToDateTime(Request.Form["txtAccBirthdate"], DateTime.Today);
+        siteAccount.AccZip = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtAccZip"], ""), 10);
+        
+        siteAccount.SaveChanges();
+
+        // redirect to the dashboard
+        Response.Redirect(Href("~/Account/Dashboard?Msg=Modify"), false);
+        return;
+    }
+}
+@section head
+{
+	<script src="@Href( "~/Scripts/jquery.validate.min.js" )" type="text/javascript"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        $("#frm").validate(
+			{
+			    messages:
+				{
+				    txtAccFName: { required: "required" },
+				    txtAccLName: { required: "required" },
+				    txtAccEMail: { required: "required", email: "Invalid Email" },
+				    txtAccPhone: { required: "required" },
+				    txtAccZip: { required: "required" }
+	    }
+			});
+	    });
+	</script>
+}
+	<!-- PAGE -->
+	<div id="page">
+		<div id="fullSide">
+			<h1>@Html.Raw(Page.SitePage.Heading)</h1>
+            @Html.Raw(Page.SitePage.Body)
+            <form name="frm" id="frm" method="post" class="basicForm">
+                <fieldset style="width:484px;">
+                    <div>
+                        <label for="txtAccFName">First Name: *</label><br />
+                        <input type="text" name="txtAccFName" class="required" size="20" maxlength="50" value="@siteAccount.AccFName" />
+                    </div>
+                    <div>
+                        <label for="txtAccLName">Last Name: *</label><br />
+                        <input type="text" name="txtAccLName" class="required" size="20" maxlength="50" value="@siteAccount.AccLName" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtAccEMail">Email:</label><br />
+                        <input type="text" name="txtAccEMail" class="required email" size="20" maxlength="128" value="@siteAccount.AccEMail" />
+                    </div>
+                    <div>
+                        <label for="txtAccPhone">Phone:</label><br />
+                        <input type="text" name="txtAccPhone" class="required" size="20" maxlength="50" value="@siteAccount.AccPhone" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtAccZip">Zip:</label><br />
+                        <input type="text" name="txtAccZip" class="required" size="10" maxlength="10" value="@siteAccount.AccZip" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtAccPhone">Date of Birth</label><br />
+                        <input type="text" name="txtAccBirthdate" class="required date" maxlength="50" value="@siteAccount.AccBirthdate.ToShortDateString()" />
+                    </div>
+                    <div>
+                        <label for="selAccGender">Gender</label><br />
+                        <select name="selAccGender" class="required">
+                            <option value="F" @((siteAccount.AccGender == "F") ? " selected" : "")>Female</option>
+                            <option value="M" @((siteAccount.AccGender == "M") ? " selected" : "")>Male</option>
+                            <option value="?" @((siteAccount.AccGender == "?") ? " selected" : "")>Unspecified</option>
+                        </select>
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div style="float:none; margin-right:20px;">
+                        <div class="orangeArrowButtonRight">
+                            <input type="submit" name="_btnSubmit" value="Submit" class="button" />
+                        </div>
+                        <div class="orangeButtonRight">
+                            <input type="button" name="_btnCancel" value="Cancel" class="button" onclick="javascript: window.location = '/Account/Dashboard';" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+		</div>
+		<br style="clear:left;" />
+	</div>

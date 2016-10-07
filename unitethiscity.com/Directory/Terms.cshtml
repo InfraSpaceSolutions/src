@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Terms & Conditions");
+    Page.SitePage.Body = SiteSettings.GetValue("DefaultDealTerms");
+
+    // identify the target location for the detailed view
+    int locID = WebConvert.ToInt32(UrlData[0], 0);
+    // identify the current period
+    int perID = Period.IdentifyPeriod(DateTime.Now);
+    
+    // get the detailed information regarding the business and location
+    SiteLocationInfo siteLocationInfo = new SiteLocationInfo(locID);
+    SiteBusiness siteBusiness = new SiteBusiness(siteLocationInfo.BusID);
+    
+    WebDBContext db = new WebDBContext();
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Directory/Businesses" )">Business Directory</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Directory/Business/" + locID )">@siteBusiness.BusName</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@Page.SitePage.Heading</h1>
+            @if (siteLocationInfo.DelCustomTerms.Trim().Length != 0)
+            {
+    			<h2>@siteBusiness.BusFormalName Terms and Conditions</h2>
+                <p>@siteLocationInfo.DelCustomTerms</p>
+                <br />
+            }
+            @Html.Raw(Page.SitePage.Body)
+        </div>
+    </div>

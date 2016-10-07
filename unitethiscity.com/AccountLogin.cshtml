@@ -1,0 +1,73 @@
+@{
+    Layout = "~/Shared/_Layout.cshtml";
+    
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Account Login");
+
+    // check if already logged in
+    if (SiteAccount.IsLoggedIn())
+    {
+        Response.Redirect(Href("~/Account/"), false);
+        return;
+    }
+    
+    if (IsPost)
+    {
+        WebDBContext db = new WebDBContext();
+
+        string accEMail = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtAccEMail"], ""), 128).ToLower();
+        string accPassword = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtAccPassword"], ""), 20);
+
+        SiteAccount.Login(accEMail, accPassword);
+        
+        // redirect to the dashboard
+        Response.Redirect(Href("~/Account/"), false);
+        return;
+    }
+}
+@section head
+{
+	<script src="@Href( "~/Scripts/jquery.validate.min.js" )" type="text/javascript"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        $("#frm").validate(
+			{
+			    messages:
+				{
+				    txtAccEMail: { required: "Email is required", email: "Invalid Email" },
+				    txtAccPassword: { required: "Password is required" }
+				}
+			});
+	    });
+	</script>
+}
+	<!-- PAGE -->
+	<div id="page">
+		<div id="leftSide">
+			<h1>@Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+            <form name="frm" id="frm" method="post" class="basicForm">
+                <fieldset style="width:484px;">
+                    <div>
+                        <label for="txtAccEMail">E-Mail Address: *</label><br />
+                        <input type="text" name="txtAccEMail" id="txtAccEMail" class="required email" size="50" maxlength="128" value="@Request["txtAccEMail"]@Request.QueryString["email"]" />
+                    </div>
+                    <div style="margin-left:20px;">
+                        <label for="txtAccPassword">Password: *</label><br />
+                        <input type="password" name="txtAccPassword" id="txtAccPassword" class="required" size="20" maxlength="20" value="@Request["txtAccPassword"]" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div class="orangeArrowButtonRight">
+                        <input type="submit" name="_btnSubmit" value="Login" class="button" />
+                    </div>
+                    <br style="clear:right;" />
+                    <div style="float:right; margin:10px 20px 5px 0px;"><a href="@Href( "~/AccountForgotPassword" )">Forgot your password?</a></div>
+                    <br style="clear:right;" />
+                </fieldset>
+            </form>
+		</div>
+		@RenderPage( "~/Shared/_RightColumn.cshtml" )
+		<br style="clear:left;" />
+	</div>

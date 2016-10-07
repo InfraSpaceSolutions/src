@@ -1,0 +1,14 @@
+﻿@{
+    // remove any layout that has been applied - specifically by page start
+    Layout = null;
+
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+    
+    Response.Redirect(Href("~/Member/Dashboard"), false);
+    return;
+}

@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "unitethiscity.com", "http://localhost:4278", "{8CA58A02-E345-4DC0-9D8B-FB65DE259CCB}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_4278"
+		Debug.AspNetCompiler.PhysicalPath = "unitethiscity.com\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4278\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_4278"
+		Release.AspNetCompiler.PhysicalPath = "unitethiscity.com\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4278\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "unitethiscity.com\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "utcwebapi", "api.unitethiscity.com\utcwebapi.csproj", "{C4BAD4CD-3795-4020-8679-BE5860D8246A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A1298251-4E48-4984-AC83-E4AD6C1A2100}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gendeals", "gendeals\gendeals.csproj", "{80A61C30-20AF-4ADD-9F78-BF4137EFF65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "genevents", "genevents\genevents.csproj", "{280DCCB0-D761-42C4-9557-5D5D059FB84C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "genmessages", "genmessage\genmessages.csproj", "{442B8B4F-AFCC-4FBC-94ED-6592C7C672B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "genpush", "genpush\genpush.csproj", "{2215F00C-B7D5-4C9E-B717-1873033DC7E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "genprox", "genprox\genprox.csproj", "{40EA5EDA-6955-45C1-A45C-3ECFC836426A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CA58A02-E345-4DC0-9D8B-FB65DE259CCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA58A02-E345-4DC0-9D8B-FB65DE259CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA58A02-E345-4DC0-9D8B-FB65DE259CCB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA58A02-E345-4DC0-9D8B-FB65DE259CCB}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{C4BAD4CD-3795-4020-8679-BE5860D8246A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4BAD4CD-3795-4020-8679-BE5860D8246A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4BAD4CD-3795-4020-8679-BE5860D8246A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4BAD4CD-3795-4020-8679-BE5860D8246A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A61C30-20AF-4ADD-9F78-BF4137EFF65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A61C30-20AF-4ADD-9F78-BF4137EFF65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A61C30-20AF-4ADD-9F78-BF4137EFF65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A61C30-20AF-4ADD-9F78-BF4137EFF65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280DCCB0-D761-42C4-9557-5D5D059FB84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280DCCB0-D761-42C4-9557-5D5D059FB84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280DCCB0-D761-42C4-9557-5D5D059FB84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280DCCB0-D761-42C4-9557-5D5D059FB84C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{442B8B4F-AFCC-4FBC-94ED-6592C7C672B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442B8B4F-AFCC-4FBC-94ED-6592C7C672B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442B8B4F-AFCC-4FBC-94ED-6592C7C672B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442B8B4F-AFCC-4FBC-94ED-6592C7C672B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2215F00C-B7D5-4C9E-B717-1873033DC7E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2215F00C-B7D5-4C9E-B717-1873033DC7E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2215F00C-B7D5-4C9E-B717-1873033DC7E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2215F00C-B7D5-4C9E-B717-1873033DC7E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40EA5EDA-6955-45C1-A45C-3ECFC836426A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40EA5EDA-6955-45C1-A45C-3ECFC836426A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40EA5EDA-6955-45C1-A45C-3ECFC836426A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40EA5EDA-6955-45C1-A45C-3ECFC836426A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

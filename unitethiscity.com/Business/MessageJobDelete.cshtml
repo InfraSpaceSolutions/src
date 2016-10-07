@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Message Job: Delete");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int msjID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    SiteMessageJob siteMessageJob = new SiteMessageJob(msjID);
+    
+    if (!siteMessageJob.CanUserEdit())
+    {
+        throw new Sancsoft.Web.WebException(Sancsoft.Web.RC.AccessDenied);
+    }
+    
+    WebDBContext db = new WebDBContext(); 
+
+    // get the object to delete
+    TblMessageJobs rsMsj = db.TblMessageJobs.SingleOrDefault(target => target.MsjID == siteMessageJob.MsjID && target.BusID == siteBusiness.BusID);
+    TblMessages rsMsg = db.TblMessages.SingleOrDefault(target => target.MsgID == siteMessageJob.MsgID);
+    
+    // Delete the record
+    db.TblMessages.DeleteOnSubmit(rsMsg);
+    db.TblMessageJobs.DeleteOnSubmit(rsMsj);
+    db.SubmitChanges();
+
+    // redirect to the dashboard
+    Response.Redirect(Href("~/Business/MessageJobs/?msg=Modify"), false);
+    return;
+}

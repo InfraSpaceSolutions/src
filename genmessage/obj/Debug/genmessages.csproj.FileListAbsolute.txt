@@ -1,0 +1,6 @@
+C:\Users\mterry\git\utc\src\genmessage\bin\Debug\GenMessages.exe.config
+C:\Users\mterry\git\utc\src\genmessage\bin\Debug\GenMessages.exe
+C:\Users\mterry\git\utc\src\genmessage\bin\Debug\GenMessages.pdb
+C:\Users\mterry\git\utc\src\genmessage\obj\Debug\GenMessages.exe
+C:\Users\mterry\git\utc\src\genmessage\obj\Debug\GenMessages.pdb
+C:\Users\mterry\git\utc\src\genmessage\obj\Debug\genmessages.csprojResolveAssemblyReference.cache

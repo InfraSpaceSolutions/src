@@ -1,0 +1,6 @@
+C:\Users\mterry\git\utc\src\genprox\bin\Debug\GenProx.exe.config
+C:\Users\mterry\git\utc\src\genprox\bin\Debug\GenProx.exe
+C:\Users\mterry\git\utc\src\genprox\bin\Debug\GenProx.pdb
+C:\Users\mterry\git\utc\src\genprox\obj\Debug\genprox.csprojResolveAssemblyReference.cache
+C:\Users\mterry\git\utc\src\genprox\obj\Debug\GenProx.exe
+C:\Users\mterry\git\utc\src\genprox\obj\Debug\GenProx.pdb

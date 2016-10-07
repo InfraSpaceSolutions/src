@@ -1,0 +1,6 @@
+C:\Users\mterry\git\utc\src\genevents\bin\Debug\GenEvents.exe.config
+C:\Users\mterry\git\utc\src\genevents\bin\Debug\GenEvents.exe
+C:\Users\mterry\git\utc\src\genevents\bin\Debug\GenEvents.pdb
+C:\Users\mterry\git\utc\src\genevents\obj\Debug\GenEvents.exe
+C:\Users\mterry\git\utc\src\genevents\obj\Debug\GenEvents.pdb
+C:\Users\mterry\git\utc\src\genevents\obj\Debug\genevents.csprojResolveAssemblyReference.cache

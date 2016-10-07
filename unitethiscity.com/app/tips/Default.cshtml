@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Member Reviews");
+
+    // identify the inbox message
+    int locID = WebConvert.ToInt32(Request.QueryString["loc"], 12);
+
+    // default the display values
+    string tipBody = "";
+
+    WebDBContext db = new WebDBContext();
+
+    IEnumerable<VwTips> rsTips = db.VwTips.Where(target => target.LocID == locID).OrderByDescending( target => target.TipTS);
+
+    foreach (VwTips loc in rsTips)
+    {
+        string signature = loc.AccFName + loc.AccLName.Substring(0, 1);
+        tipBody += "<h3>" + signature + "</h3>";
+        tipBody += "<div class=\"tiptext\">" + WebConvert.PreserveBreaks(HttpUtility.HtmlEncode(loc.TipText)) + "</div>";
+        tipBody += "<hr />";
+
+    }
+    if (tipBody.Length == 0)
+    {
+        tipBody = "No member reviews.  Be the first to post a review!";
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="copyright" content="Copyright (c) 1994-@DateTime.Now.Year - )|( Sanctuary Software Studio, Inc." />
+	<meta charset="utf-8" />
+    <link rel="Shortcut Icon" href="@Href( "~/favicon.ico" )" />
+    <link rel="Stylesheet" href="@Href( "~/Styles/tips.unitethiscity.css" )" />
+	<title>@Page.SitePage.Title</title>
+	<meta name="keywords" content="@Page.SitePage.Keywords" />
+	<meta name="description" content="@Page.SitePage.Description" />
+</head>
+<body>
+	<div id="tips">
+        <p>@Html.Raw(tipBody)</p>
+	</div>
+    @RenderPage( "~/Shared/_Google.cshtml" )
+</body>
+</html>

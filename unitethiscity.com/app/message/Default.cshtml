@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Inbox Message");
+    Page.SitePage.Body = SiteSettings.GetValue("DefaultDealTerms");
+    
+    // identify the inbox message
+    int inbID = WebConvert.ToInt32(Request.QueryString["inb"], 0);
+    // get the access token
+    string token = WebConvert.ToString(Request.QueryString["tok"], "");
+    Guid guidToken = new Guid(token);
+    
+    // default the display values
+    string msgFromName = "UTC";
+    string msgSummary = "Message Not Found";
+    string msgBody = "";
+    DateTime msgTS = DateTime.Now;
+    
+    WebDBContext db = new WebDBContext();
+
+    VwInboxMessages rsInb = db.VwInboxMessages.SingleOrDefault(target => target.InbID == inbID);
+    TblAPITokens rsTok = db.TblAPITokens.SingleOrDefault(target=> target.TokGuid == guidToken);
+    
+    
+    if ((rsInb != null) && (rsTok != null))
+    {
+        // confirm that the user has access to this message
+        if ( rsInb.InbToAccID == rsTok.AccID )
+        {
+            msgFromName = rsInb.MsgFromName;
+            msgSummary = rsInb.MsgSummary;
+            msgBody = rsInb.MsgBody;
+            msgTS = rsInb.MsgTS;
+            
+            // mark it as read if not already marked read
+            if ( !rsInb.InbRead )
+            {
+                TblInboxMessages markRead = db.TblInboxMessages.Single(target => target.InbID == inbID);
+                markRead.InbRead = true;
+                db.SubmitChanges();
+            }
+        }
+    }
+    
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="copyright" content="Copyright (c) 1994-@DateTime.Now.Year - )|( Sanctuary Software Studio, Inc." />
+	<meta charset="utf-8" />
+    <link rel="Shortcut Icon" href="@Href( "~/favicon.ico" )" />
+    <link rel="Stylesheet" href="@Href( "~/Styles/msg.unitethiscity.css" )" />
+	<title>@Page.SitePage.Title</title>
+	<meta name="keywords" content="@Page.SitePage.Keywords" />
+	<meta name="description" content="@Page.SitePage.Description" />
+</head>
+<body>
+	<div id="inbox">
+        <h2>@msgSummary</h2>
+        <p>@Html.Raw(WebConvert.PreserveBreaks(HttpUtility.HtmlEncode(msgBody)))</p>
+        <div style="margin-top:40px; text-align:right; font-style:italic;">- @msgFromName</div>
+        <div style="text-align:right;">@msgTS.ToString("MMMM dd, yyyy - hh:mm:ss tt")</div>
+	</div>
+    @RenderPage( "~/Shared/_Google.cshtml" )
+</body>
+</html>

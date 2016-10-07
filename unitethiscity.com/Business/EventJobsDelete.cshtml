@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Event Job: Delete");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int evjID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    WebDBContext db = new WebDBContext(); 
+
+    // get the event to delete
+    TblEventJobs rsEvj = db.TblEventJobs.SingleOrDefault(target => target.EvjID == evjID && target.BusID == siteBusiness.BusID);
+    
+    // Delete the record
+    db.TblEventJobs.DeleteOnSubmit(rsEvj);
+    db.SubmitChanges();
+
+    // redirect to the dashboard
+    Response.Redirect(Href("~/Business/RecurringEvents?msg=Modify"), false);
+    return;
+}

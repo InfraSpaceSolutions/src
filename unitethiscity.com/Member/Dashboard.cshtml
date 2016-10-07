@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Member Dashboard");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteMember siteMember = new SiteMember();
+}
+	<!-- PAGE -->
+	<div id="page">
+		<div id="fullSide">
+			<h1>@Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+		</div>
+		<br style="clear:left;" />
+	</div>

@@ -1,0 +1,24 @@
+//
+//== Reponsive styling shim for the front-end site.
+//
+
+// Bootstrap variables/mixins
+@import "bootstrap/_variables.less";
+@import "bootstrap/_mixins.less";
+
+// Responsive variables and overrides
+@import "_variables-utc.less";
+
+// Resposive style declarations
+@media(max-width:@width-breakpoint) {
+    // Mobile Only
+
+    // Core Bootstrap
+    @import "bootstrap/_bootstrap.less";
+
+    // Responsive site styles
+    @import "_responsive.less";
+
+    // Responsive form styles
+    @import "_responsive-forms.less";
+}

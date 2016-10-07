@@ -1,0 +1,127 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage(PageContext.Page.VirtualPath);
+
+    // Handle posting of the form
+    BusinessRegistrationForm formDo = new BusinessRegistrationForm( Request.Form );
+    if( IsPost )
+    {
+        formDo.ProcessForm( );
+    }
+}
+@section head
+{
+	<script src="@Href( "~/Scripts/jquery.validate.min.js" )" type="text/javascript"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        $("#frm").validate(
+			{
+			    messages:
+				{
+				    txtBurFName: { required: "required" },
+				    txtBurLName: { required: "required" },
+				    txtBurBusinessName: { required: "required" },
+				    selBurCategory: { required: "required" },
+				    emlBurEMail: { required: "required", email: "invalid" },
+				    txtBurPhone: { required: "required" }
+				}
+			});
+	    });
+	</script>
+}
+	<!-- PAGE -->
+	<div id="page">
+		<div id="leftSide">
+			<h1>@Html.Raw( Page.SitePage.PageParentHeading )</h1>
+			<h2>@Html.Raw( Page.SitePage.Heading )</h2>
+            @Html.Raw( Page.SitePage.Body )
+            <!-- REGISTRATION SIGNUP FORM -->
+            <form id="frm" method="post" class="basicForm">
+                <fieldset style="margin:0px auto;">
+                @if( ( formDo.ResultCode != Sancsoft.Web.RC.Ok ) || !formDo.ProcessedPost )
+                {
+                    if( formDo.ResultCode != Sancsoft.Web.RC.Ok )
+                    {
+                        <div style="font-weight:bold;color:Red;">@formDo.ResultTitle( )</div>
+                        <p style="color:Red;">@formDo.ResultMessage( )</p>
+                    }
+                    <div>
+                        <label for="txtBurFName">First Name</label><br />
+                        <input type="text" name="txtBurFName" class="required" maxlength="50" value="@Request["txtBurFName"]" />
+                    </div>
+                    <div>
+                        <label for="txtBurLName">Last Name</label><br />
+                        <input type="text" name="txtBurLName" class="required" maxlength="50" value="@Request["txtBurLName"]" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtBurBusinessName">Business Name</label><br />
+                        <input type="text" name="txtBurBusinessName" class="required" maxlength="128" style="width:432px;" value="@Request["txtBurBusinessName"]" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="selBurCategory">Business Category / Industry</label><br />
+                        <select id="selBurCategory" name="selBurCategory" class="required" style="min-width:250px;">
+                            <option value="">-- Choose One --</option>
+                            <option value="Restaurants">Restaurants</option>
+                            <option value="Nightlife">Nightlife</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Food">Food</option>
+                            <option value="Health and Medical">Health and Medical</option>
+                            <option value="Beauty and Spas">Beauty and Spas</option>
+                            <option value="Home Services">Home Services</option>
+                            <option value="Local Services">Local Services</option>
+                            <option value="Event Planning">Event Planning</option>
+                            <option value="Arts and Entertainment">Arts and Entertainment</option>
+                            <option value="Professional Services">Professional Services</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Hotels and Travel">Hotels and Travel</option>
+                            <option value="Education">Education</option>
+                            <option value="Real Estate">Real Estate</option>
+                            <option value="Financial Services">Financial Services</option>
+                            <option value="Professional Services">Professional Services</option>
+                            <option value="Public Services">Public Services</option>
+                            <option value="Mass Media">Mass Media</option>
+                            <option value="Religious Organizations">Religious Organizations</option>
+                        </select>
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="emlBurEMail">E-Mail Address</label><br />
+                        <input type="email" name="emlBurEMail" class="required email" maxlength="128" style="width:300px;" value="@Request["emlBurEMail"]" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtBurPhone">Phone Number</label><br />
+                        <input type="text" name="txtBurPhone" class="required" maxlength="50" style="width:300px;" value="@Request["txtBurPhone"]" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div style="width:436px;">
+                        <label for="txtBurAdditionalInfo">Please provide any additional information about your business...</label><br />
+                        <textarea name="txtBurAdditionalInfo" rows="4" cols="30">@Request["txtBurAdditionalInfo"]</textarea>
+                    </div>
+                    <br style="clear:left;" />
+                    <br style="clear:left;" />
+                    <div class="orangeButtonLeftHands">
+                        <input type="submit" name="_btnSubmit" value="Business Signup" class="button" />
+                    </div>
+                    <br style="clear:both;" />
+                }
+                else
+                {
+                    // form submission completed
+                    <p>Thank you. Your information has been successfully recorded.</p>
+                }
+                </fieldset>
+            </form>
+		</div>
+		@RenderPage( "~/Shared/_RightColumn.cshtml" )
+		<br style="clear:left;" />
+	</div>

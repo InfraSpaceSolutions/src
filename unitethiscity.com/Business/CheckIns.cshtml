@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Loyalty Points");
+
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    List<SummaryStats> stats = siteBusinessInfo.CalculateSummaryStats();
+    SummaryStats stat = stats[1];
+
+    WebDBContext db = new WebDBContext();
+    
+    // build the webgrid for display
+    IEnumerable<VwCheckIns> rs = (from rows in db.VwCheckIns where rows.BusID == siteBusiness.BusID orderby rows.ChkTS descending select rows);
+    WebGrid webGrid = new WebGrid(rs, rowsPerPage: Convert.ToInt32(SiteSettings.GetValue("DefaultPageSize")));    
+
+    // get the message from the query string ( form submission message )
+    string msg = WebConvert.ToString(Request.QueryString["Msg"], "");
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Business/Dashboard" )">Business Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@HttpUtility.HtmlEncode(siteBusiness.BusName): @Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+
+            <!-- DASHBOARD -->
+
+            <!-- NOTIFICATION BOX -->
+            @if(msg == "Modify")
+            {
+                <div class="NotificationBox Green">
+                    <div class="NotificationMessage">Your business information has been updated</div>
+                    <div class="NotificationClose"></div>
+                </div>
+                <br />
+            }
+
+            <!-- BUSINESS BOX  -->
+            <div class="dashboardBusinessBox">
+                <div class="dashboardBusinessImage"><img src="@siteBusinessInfo.ImageUrl(true)" width="100" height="100" alt="@siteBusiness.BusName" /></div>
+                <div style="float:left; width:640px;margin-right:0px;">
+                    <div style="text-align:center;">
+                        <div style="background-color:white;margin-top:0px; padding:10px; border-radius:10px;height:80px;">
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">Today</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.Today</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">Past Week</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.PastWeek</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">This Month</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.ThisPeriod</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">Last Month</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.LastPeriod</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">All-Time</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.AllTime</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br style="clear:left;" />
+            @RenderPage( "~/Shared/_BusinessTabs.cshtml" )
+            <h2>Loyalty Points</h2>
+            <div id="WebGridPanel" class="WebGrid">
+                @webGrid.GetHtml(
+                    columns: webGrid.Columns(
+                    webGrid.Column("AccFName", "Account",  format: @<text>@SiteBusiness.FormatMemberName(item.AccFName, item.AccLName)</text>, style:"wgWidth20 wgLeft"),
+                    webGrid.Column("PerName", "Month", format: @<text>@(item.PerName)</text>, style:"wgWidth15 wgCenter"),
+                    webGrid.Column("ChkTS", "Timestamp", format: @<text>@(item.ChkTS.ToShortDateString()) - @(item.ChkTS.ToShortTimeString())</text>, style:"wgWidth25 wgCenter"),
+                    webGrid.Column("LocName", "Location", format: @<text>@HttpUtility.HtmlEncode(item.LocName)</text>, style:"wgWidth40 wgLeft")
+                ),
+                    tableStyle: "WebGridTable",
+                    headerStyle: "WebGridHeader",
+                    rowStyle: "WebGridRow",
+                    alternatingRowStyle: "WebGridRowAlt",
+                    footerStyle: "WebGridFooter",
+                    mode: WebGridPagerModes.All,
+                    firstText: "First Page",
+                    lastText: "Last Page",
+                    numericLinksCount: 10,
+                    emptyRowCellValue: "N/A"
+                )
+            </div>
+		</div>
+		<br style="clear:left;" />
+	</div>

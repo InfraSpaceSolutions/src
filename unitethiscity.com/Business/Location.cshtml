@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Location");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int locID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteLocationInfo siteLocationInfo = new SiteLocationInfo(locID);
+
+    WebDBContext db = new WebDBContext();   
+
+    // get the message from the query string ( form submission message )
+    string msg = WebConvert.ToString(UrlData[1], "");
+
+    // build the webgrid for display from the statistics
+    // member activity for this location
+    List<SummaryStats> summaryStats = siteLocationInfo.CalculateSummaryStats();
+    WebGrid webGrid = new WebGrid(summaryStats, rowsPerPage: Convert.ToInt32(SiteSettings.GetValue("DefaultPageSize")));
+
+    // Get all of the business location tips
+    var rsTip = db.VwTips.Where(target => target.LocID == locID).OrderByDescending(target => target.TipTS);
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Business/Dashboard" )">Business Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@HttpUtility.HtmlEncode(siteBusiness.BusName): @Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+
+            <!-- DASHBOARD -->
+
+            <!-- NOTIFICATION BOX -->
+            @if(msg == "Modify")
+            {
+                <div class="NotificationBox Green">
+                    <div class="NotificationMessage">Your location information has been updated</div>
+                    <div class="NotificationClose"></div>
+                </div>
+                <br />
+            }
+            
+
+            <!-- BUSINESS LOCATION BOX  -->
+            <div class="dashboardBusinessBox">
+                <div class="dashboardBusinessInfo" style="width:300px; padding:5px;">
+                    <div><strong>@(siteLocationInfo.LocationTags().ToUpper())</strong></div>
+                    <div>&nbsp;</div>
+                    <div>@(siteLocationInfo.LocName)</div>
+                    <div>@(siteLocationInfo.LocAddress)</div>
+                    <div>@(siteLocationInfo.LocCity + ", " + siteLocationInfo.LocState + " " + siteLocationInfo.LocZip)</div>
+                    @if (siteLocationInfo.LocPhone != "")
+                    {
+                        <br /><div>Tel: @(Phone.Format(siteLocationInfo.LocPhone))</div>
+                    }
+                </div>
+                <div style="float:right; width:144px;margin-right:10px;margin-bottom:5px;">
+                    <!-- CURRENT RATING -->
+                    <div style="text-align:center;">
+                        <div style=""><img src="@Href("~/images/Ratings/rating" + Rating.ImageNumber(siteLocationInfo.LocRating) + "@2x.png")" width="144" height="24" alt="" /></div>
+                        <div style="background-color:white;margin-top:20px; padding:10px; border-radius:10px;">
+                            <div style="margin-top:5px;font-size:14px; font-weight:bold;">UTC CASH</div>
+                            <div style="margin-top:5px; margin-bottom:5px; font-size:32px;font-weight:bold;">@siteLocationInfo.LocationDealValue()</div>
+                        </div>
+                    </div>
+                </div>
+                <br style="clear:left;" />
+            </div>
+            <div style="text-align:right;">
+                <div class="orangeButton rightButton"><a href="@Href("~/Directory/Business/" + locID )" class="button">View in Directory</a></div>
+                <div class="orangeButton rightButton"><a href="@Href("~/Business/LocationModify/" + locID )" class="button">Edit Location</a></div>
+            </div>
+
+            
+            <h2 style="clear:both; padding-top:10px;">Member Activity</h2>
+            <div id="WebGridPanel" class="WebGrid">
+                @webGrid.GetHtml(
+                    columns: webGrid.Columns(
+                    webGrid.Column("Name", "Member Activity",  format: @<a href="@Href( "~/Business/" + item.Link )">@item.Name</a>, style:"wgWidth25 wgLeft"),
+                    webGrid.Column("Today", "Today", format: @<text>@item.Today</text>, style:"wgWidth15 wgCenter"),
+                    webGrid.Column("PastWeek", "Past Week", format: @<text>@item.PastWeek</text>, style:"wgWidth15 wgCenter"),
+                    webGrid.Column("ThisPeriod", "This Month", format: @<text>@item.ThisPeriod</text>, style:"wgWidth15 wgCenter"),
+                    webGrid.Column("LastPeriod", "Last Month", format: @<text>@item.LastPeriod</text>, style:"wgWidth15 wgCenter"),
+                    webGrid.Column("AllTime", "All Time", format: @<text>@item.AllTime</text>, style:"wgWidth15 wgCenter")
+                ),
+                    tableStyle: "WebGridTable",
+                    headerStyle: "WebGridHeader",
+                    rowStyle: "WebGridRow",
+                    alternatingRowStyle: "WebGridRowAlt",
+                    footerStyle: "WebGridFooter",
+                    mode: WebGridPagerModes.All,
+                    firstText: "First Page",
+                    lastText: "Last Page",
+                    numericLinksCount: 10,
+                    emptyRowCellValue: "N/A"
+                )
+            </div>
+            
+            <div style="margin-top:25px;">
+                <div style="float:right; width:350px;">
+                    <h2>Maps &amp; Directions</h2>
+                    @{
+                        string embedurl = HttpUtility.UrlEncode(siteLocationInfo.LocAddress) + "," + HttpUtility.UrlEncode(siteLocationInfo.LocCity) + "," + HttpUtility.UrlEncode(siteLocationInfo.LocState) + "," + HttpUtility.UrlEncode(siteLocationInfo.LocZip);
+                    }
+                    <iframe style="border:1px solid black;" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=@(embedurl)&amp;ieUTF8&hq=&amp;t=m&amp;hnear=@(embedurl)&amp;output=embed&amp;iwloc=near"></iframe>
+                    <div style="text-align:right;margin-top:10px; margin-bottom:10px;">
+                        <div class="orangeButton"><a href="http://maps.google.com/maps?q=@(siteLocationInfo.LocAddress),@(siteLocationInfo.LocCity),@(siteLocationInfo.LocState),@(siteLocationInfo.LocZip)" target="_blank">MAP &amp; DIRECTIONS</a></div>
+                    </div>
+                </div>
+                <div style="width:380px;">
+                    <h2>Member Tips</h2>
+                    @if (rsTip.Any())
+                    {
+                        foreach (var row in rsTip)
+                        {
+                            <div class="TipBox">
+                                <div class="TipText">@Html.Raw(WebConvert.PreserveBreaks(row.TipText))</div>
+                                <div class="TipAccount">- @(row.AccFName) @(row.AccLName.Substring(0, 1)), @(row.TipTS.ToShortDateString())</div>
+                                
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>There are currently no tips for this business.</p>
+                    }
+                </div>
+            </div>
+            <br style="clear:left;" />
+		</div>
+		<br style="clear:left;" />
+	</div>

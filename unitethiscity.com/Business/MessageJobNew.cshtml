@@ -1,0 +1,129 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Message");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteAccount siteAccount = new SiteAccount();
+    
+    WebDBContext db = new WebDBContext();
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    // get the message job to edit / delete - make sure that it is associated with the active business
+    SiteMessageJob siteMessageJob = new SiteMessageJob();
+    siteMessageJob.MjsID = (int)MessageJobStates.Definition;
+    siteMessageJob.RolID = (int)AccountRoles.Member;
+    siteMessageJob.BusID = siteBusiness.BusID;
+    siteMessageJob.MsgFromID = siteAccount.AccID;
+    siteMessageJob.MsgFromName = siteBusiness.BusName;
+    siteMessageJob.MsjSendTS = DateTime.Today.AddDays(1).AddHours(16);
+    siteMessageJob.MsgTS = DateTime.Now;
+    siteMessageJob.MsgExpires = DateTime.Now;
+    
+    if (IsPost)
+    {
+        // save updates
+        siteMessageJob.MsgFromName = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtMsgFromName"], ""), 50);
+        siteMessageJob.MsgSummary = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtMsgSummary"], ""), 140);
+        siteMessageJob.MsgBody = WebConvert.ToString(Request.Form["txtMsgBody"], "");
+        siteMessageJob.MsjSendTS = WebConvert.ToDateTime(Request.Form["txtMsjSendTSDate"], DateTime.Today);
+        siteMessageJob.MsjSendTS = siteMessageJob.MsjSendTS.AddHours(WebConvert.ToInt32(Request.Form["selMsjSendTSTime"], 23));
+        siteMessageJob.SaveChanges();
+        
+        // redirect to the dashboard
+        Response.Redirect(Href("~/Business/MessageJob/" + siteMessageJob.MsjID), false);
+        return;
+    }
+}
+@section head
+{
+	<script src="@Href( "~/Scripts/jquery.validate.min.js" )" type="text/javascript"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        $("#frm").validate(
+			{
+			    messages:
+				{
+				    txtMsjFromName: { required: "required" },
+				    txtMsjSendTSDate: { required: "required" },
+				    selMsjSendTSTime: { required: "required" },
+				    txtMsgSummary: { required: "required" },
+	                txtMsgBody: { required: "required" }
+	            }
+			});
+	    });
+	</script>
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Business/Dashboard" )">Business Dashboard</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Business/MessageJobs")">Messaging</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@HttpUtility.HtmlEncode(siteBusiness.BusName): @Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+            <!-- DASHBOARD -->
+            <form name="frm" id="frm" method="post" class="basicForm">
+                <fieldset style="width:770px;">
+                    <div>
+                        <label for="txtEvjName">From Name: *</label><br />
+                        <input type="text" name="txtMsgFromName" id="txtMsgFromName" class="required" size="40" maxlength="50" style="width:350px;" value="@siteMessageJob.MsgFromName" />
+                    </div>
+                    <div style="margin-left:50px;">
+                        <label for="txtEvjBeginDate">Time to Send: *</label><br />
+                        <input type="text" name="txtMsjSendTSDate" id="txtMsjSendTSDate" class="required" size="10" maxlength="10" style="width:100px;" value="@siteMessageJob.MsjSendTS.ToShortDateString()" />
+                        <select name="selMsjSendTSTime" id="selMsjSendTSTime">
+                            <option value="">Select ...</option>
+                            @for (int i = 0; i < 24; i++)
+                            {
+                                DateTime dt = DateTime.Today.AddHours(i);
+                                <option value="@i" @((siteMessageJob.MsjSendTS.Hour == dt.Hour) ? " selected" : "")>@dt.ToShortTimeString()</option>
+                            }
+
+                        </select>
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtEvjSummary">Summary: *</label><br />
+                        <input type="text" name="txtMsgSummary" id="txtMsgSummary" class="required" size="80" maxlength="140" style="width:750px;" value="@siteMessageJob.MsgSummary" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtEvjBody">Message Body: *</label><br />
+                        <textarea name="txtMsgBody" id="txtMsgBody" class="required" rows="10" cols="80" style="width:750px;">@siteMessageJob.MsgBody</textarea>
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div style="float:none; margin-right:0px;">
+                        <div class="orangeButtonRight">
+                            <input type="submit" name="_btnSubmit" value="Create" class="button" />
+                        </div>
+                        <div class="orangeButtonRight">
+                            <input type="button" name="_btnCancel" value="Cancel" class="button" onclick="javascript: window.location = '/Business/MessageJobs/';" />
+                        </div>
+                    </div>
+                    <legend></legend>
+                </fieldset>
+            </form>
+		</div>
+		<br style="clear:left;" />
+	</div>

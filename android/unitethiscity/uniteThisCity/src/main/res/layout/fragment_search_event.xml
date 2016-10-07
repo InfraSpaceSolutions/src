@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutUTC"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/crumbSearchEvent"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/crumb_bar_fixed"
+        android:gravity="center"
+        android:paddingBottom="2dp"
+        android:text="@string/search_event"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayoutSearchEventKeyword"
+        android:layout_below="@+id/crumbSearchEvent"
+        android:visibility="visible"
+        android:background="#616161">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewSearchEventIcon"
+            android:src="@drawable/icon_search"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_events"
+            android:id="@+id/textViewSearchEventKeywordTitle"
+            android:layout_below="@+id/imageViewSearchEventIcon"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="24dp"
+            android:layout_marginBottom="5dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editTextEventSearchFilter"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="6"
+            android:background="@drawable/rounded_corners"
+            android:ems="10"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@null"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_below="@+id/textViewSearchEventKeywordTitle"
+            android:hint="@string/search_keyword"
+            android:gravity="center">
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_keyword_detail"
+            android:id="@+id/textViewSearchEventKeywordDetail"
+            android:layout_below="@+id/editTextEventSearchFilter"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:layout_marginBottom="10dp" />
+
+        <EditText
+            android:id="@+id/editTextEventSearchDate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="6"
+            android:background="@drawable/rounded_corners"
+            android:ems="10"
+            android:inputType="none"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textCursorDrawable="@null"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/textViewSearchEventKeywordDetail"
+            android:gravity="center"
+            android:layout_toLeftOf="@+id/buttonSearchEventDateSelect"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:editable="false" />
+
+        <Button
+            android:id="@+id/buttonSearchEventDateSelect"
+            android:text="@string/search_event_date_button"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_sign_up_email"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_below="@+id/textViewSearchEventKeywordDetail"
+            android:layout_alignRight="@+id/editTextEventSearchFilter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_date"
+            android:id="@+id/textViewSearchEventDateDetail"
+            android:layout_below="@+id/editTextEventSearchDate"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:layout_marginBottom="25dp" />
+
+        <Button
+            android:id="@+id/buttonSearchEventKeywordCancel"
+            android:text="@string/search_keyword_cancel"
+            android:layout_width="125dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_sign_up_email"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_below="@+id/textViewSearchEventDateDetail"
+            android:layout_alignLeft="@+id/editTextEventSearchFilter" />
+
+        <Button
+            android:id="@+id/buttonSearchEventKeywordGo"
+            android:text="@string/search_keyword_go"
+            android:layout_width="125dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_sign_up_email"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_below="@+id/textViewSearchEventDateDetail"
+            android:layout_alignRight="@+id/editTextEventSearchFilter" />
+
+        <Button
+            android:id="@+id/buttonSearchEventKeywordCategory"
+            android:text="@string/search_keyword_by_category"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_sign_up_email"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:layout_below="@+id/buttonSearchEventKeywordCancel"
+            android:layout_alignLeft="@+id/editTextEventSearchFilter"
+            android:layout_alignStart="@+id/editTextEventSearchFilter"
+            android:layout_alignRight="@+id/editTextEventSearchFilter"
+            android:layout_marginTop="15dp" />
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayoutSearchEventResults"
+        android:layout_below="@+id/crumbSearchEvent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutEventSearchTools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonSearchEventKeyword"
+                android:text="@string/search_by_keyword"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_sign_up_email"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp" />
+
+            <Button
+                android:id="@+id/buttonSearchEventCategory"
+                android:text="@string/search_by_category"
+                android:layout_width="300dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_sign_up_email"
+                android:textColor="#333333"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollViewSearchEvent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/linearLayoutEventSearchTools"
+            android:layout_marginTop="10dp"
+            android:isScrollContainer="false" >
+
+           <LinearLayout
+                android:id="@+id/linearLayoutSearchEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

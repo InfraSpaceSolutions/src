@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Update Billing Unavailable");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteAccount siteAccount = new SiteAccount();
+    
+    // subscription support
+    SiteSubscription siteSubscription = new SiteSubscription();
+
+    WebDBContext db = new WebDBContext();
+    string contactEMail = SiteSettings.GetValue("SupportEMail");
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+            <p>We're sorry. Your Unite This City billing cannot be modified through the web site.</p>
+            <p>Please submit your request through the <a href="@Href("~/ContactUs")">Contact Us</a> form or send electronic mail to <a href="mailto:@contactEMail">@contactEMail</a> to have
+                your membership status changed.</p>
+        	<div class="orangeBackButtonRight" style="margin-left:30px;margin-top:10px;"><a href="@Href( "~/Account/Dashboard" )">BACK</a></div>
+            <br style="clear:both;" />
+		</div>
+		<br style="clear:left;" />
+	</div>

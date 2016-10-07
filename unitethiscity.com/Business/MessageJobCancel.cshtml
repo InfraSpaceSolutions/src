@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Message Job: Cancel");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int msjID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    SiteMessageJob siteMessageJob = new SiteMessageJob(msjID);
+    
+    if (!siteMessageJob.CanUserCancel())
+    {
+        throw new Sancsoft.Web.WebException(Sancsoft.Web.RC.AccessDenied);
+    }
+
+    siteMessageJob.CancelSend();
+    siteMessageJob.SaveChanges();
+
+    // redirect to the dashboard
+    Response.Redirect(Href("~/Business/MessageJob/" + siteMessageJob.MsjID), false);
+    return;
+}

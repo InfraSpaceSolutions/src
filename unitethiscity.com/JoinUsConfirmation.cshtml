@@ -1,0 +1,84 @@
+﻿@{
+    // restore the multi-page form processing object
+    RegisterMember fh = (RegisterMember)Session["objRegisterMember"];
+    if( fh == null || fh.AccEMail == null )
+    {
+        Layout = null;
+        Response.Redirect(Href("~/JoinUs"), false);
+        return;
+    }
+
+    // this page needs SSL if it is available (we're in production)
+    if (SSL.ForceSSL())
+    {
+        Layout = null;
+        return;
+    }
+
+    Layout = "~/Shared/_Layout.cshtml";
+    
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage(7);
+    
+    // process postbacks of the form
+    if (IsPost)
+    {
+        if ( fh.ProcessConfirmation(Request.Form) )
+        {
+            Response.Redirect(Href("~/JoinUsThankYou"), false);
+        }
+    }
+    
+}
+	<!-- PAGE -->
+	<div id="page">
+		<div class="breadcrumbs">
+			<div class="breadcrumbGray"><a href="@Href( "~/JoinUs" )">Create Account</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+			<div class="breadcrumbGray"><a href="@Href( "~/JoinUsBilling" )">Billing Info</a></div>
+			<div class="breadcrumbSpacerGrayOrange">&nbsp;</div>
+			<div class="breadcrumbOrange">Review</div>
+			<div class="breadcrumbEndOrgange">&nbsp;</div>
+			<br style="clear:left;" />
+		</div>
+		<div id="leftSide">
+			<h1>Join Us</h1>
+			<div class="hrGray"></div>
+            <form id="frm" method="post" class="basicForm">
+                <h2>Review your order...</h2>
+                <!-- ORDER TEXT PLACER -->
+                <p>You're ready to complete your order for <strong>@fh.ProductName() for @fh.ProductPrice().ToString("C") per month</strong> to Unite This City. Please review your order information and click Finish to become a member.</p>
+                <!-- ACCOUNT INFO -->
+                <div style="float:left; width:250px;">
+                    <h4>Account</h4>
+                    <div>@fh.AccFName @fh.AccLName</div>
+                    <div>@fh.AccEMail</div>
+                    <div>@fh.AccPhone</div>
+                </div>
+                <!-- BILLING ADDRESS -->
+                <div style="float:left; width:250px;">
+                    <h4>Billing Address</h4>
+                    <div>@fh.SubBillFName @fh.SubBillLName<br />@fh.SubBillAddress<br />@fh.SubBillCity, @fh.SubBillState @fh.SubBillZip</div>
+                </div>
+                <br style="clear:left;" />
+                <br />
+                <!-- CREDIT CARD TEXT PLACER -->
+                <p class="highlight">Starting immediately, you can download the app on your mobile device and take full advantage of your membership.</p>
+                @if (fh.ProID == 1)
+                {
+                    <p>Your first month of Unite This City is free for using the promo code <span class="highlight">@fh.PromoCode</span>. Please enjoy your trial membership.</p>
+                }
+                <p>Your membership will be charged to credit card <strong>@CreditCardUtility.ExpungeCardNumber(fh.SubBillCardNumber)</strong> on @fh.FirstBillingDate.ToShortDateString().</p>
+			    <div class="hrGray"></div>
+                <h4 style="float:right;">Click the finish button to complete your order.</h4>
+                <br style="clear:right;" />
+                <div class="orangeArrowButtonRight">
+                    <input type="submit" name="_btnSubmit" value="Finish" class="button" />
+                </div>
+                <div class="orangeBackButtonRight" style="margin-right:30px;margin-top:10px;"><a href="@Href( "~/JoinUsBilling" )">BACK</a></div>
+                <br style="clear:both;" />
+            </form>
+		</div>
+		@RenderPage( "~/Shared/_RightColumn.cshtml" )
+		<br style="clear:left;" />
+	</div>

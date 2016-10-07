@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Event Job: Delete");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int evjID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    WebDBContext db = new WebDBContext(); 
+
+    // get the job and confirm that it goes with us
+    TblEventJobs rsEvj = db.TblEventJobs.Single(target => target.EvjID == evjID && target.BusID == siteBusiness.BusID);
+
+    // delete all associated events
+    db.ExecuteCommand("DELETE FROM tblEvents WHERE EvjID=" + evjID);
+
+    // redirect to the dashboard
+    Response.Redirect(Href("~/Business/EventJobs/" + evjID + "/?msg=Purge"), false);
+    return;
+}

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutDialogPINParent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#00FFFFFF" >
+	
+	<RelativeLayout
+	    android:id="@+id/relativeLayoutDialogPIN"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true"
+	    android:layout_gravity="center"
+	    android:background="@drawable/rounded_corners"
+	    android:paddingBottom="25dp" >
+	
+	    <LinearLayout
+	        android:id="@+id/linearLayoutHeaderPIN"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="5dp"
+	        android:layout_marginTop="10dp"
+	        android:background="#3B3B3B"
+	        android:orientation="vertical"
+	        android:paddingBottom="10dp"
+	        android:paddingLeft="20dp"
+	        android:paddingRight="20dp"
+	        android:paddingTop="10dp" >
+	
+	        <TextView
+	            android:id="@+id/textViewCheckInRedeem"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:gravity="center"
+	            android:minWidth="150dp"
+	            android:text="@string/dialog_pin_enter"
+	            android:textColor="@android:color/white"
+	            android:textSize="20sp"
+	            android:textStyle="bold" />
+
+	    </LinearLayout>
+
+	    <TextView
+	        android:id="@+id/textViewPINRequired"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderPIN"
+	        android:layout_alignRight="@id/linearLayoutHeaderPIN"
+	        android:layout_below="@id/linearLayoutHeaderPIN"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="30dp"
+	        android:layout_marginTop="20dp"
+	        android:gravity="center"
+	        android:text="@string/dialog_pin_required"
+	        android:textColor="@android:color/black"
+	        android:textSize="16sp"
+	        android:textStyle="bold" />
+
+	    <EditText
+	        android:id="@+id/editTextPIN"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/textViewPINRequired"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="20dp"
+	        android:background="@drawable/rounded_corners"
+	        android:ems="10"
+	        android:gravity="center_vertical"
+	        android:inputType="textPassword"
+	        android:lines="1"
+	        android:maxLength="8"
+	        android:maxLines="1"
+	        android:textColor="@android:color/black"
+	        android:textCursorDrawable="@null" />
+
+	    <TextView
+	        android:id="@+id/textViewDescriptionPIN"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderPIN"
+	        android:layout_alignRight="@id/linearLayoutHeaderPIN"
+	        android:layout_below="@id/editTextPIN"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="20dp"
+	        android:gravity="center"
+	        android:text="@string/dialog_pin_description"
+	        android:textColor="@android:color/black" />
+
+	    <Button
+	        android:id="@+id/buttonCancelPIN"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/buttonSubmitPIN"
+	        android:layout_alignBottom="@+id/buttonSubmitPIN"
+	        android:layout_alignRight="@+id/textViewDescriptionPIN"
+	        android:background="@drawable/rounded_corners"
+	        android:text="@string/dialog_pin_cancel"
+	        android:textColor="#333333" />
+
+	    <Button
+	        android:id="@+id/buttonSubmitPIN"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/textViewDescriptionPIN"
+	        android:layout_below="@+id/textViewDescriptionPIN"
+	        android:background="@drawable/rounded_corners"
+	        android:text="@string/dialog_pin_submit"
+	        android:textColor="#333333" />
+	
+	</RelativeLayout>    
+
+</RelativeLayout>

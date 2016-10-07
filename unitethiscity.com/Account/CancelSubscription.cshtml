@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Cancel Subscription");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Layout = null;
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    // this page needs SSL if it is available (we're in production)
+    if (SSL.ForceSSL())
+    {
+        Layout = null;
+        return;
+    }
+    
+    SiteAccount siteAccount = new SiteAccount();
+    
+    // subscription support
+    SiteSubscription siteSubscription = new SiteSubscription();
+    if (siteSubscription.PtyID <= 0)
+    {
+        Layout = null;
+        Response.Redirect("~/Account/CancelSubscriptionUnavailable", false);
+        return;
+    }
+
+    WebDBContext db = new WebDBContext();
+    
+    // process postbacks of the form
+    if (IsPost)
+    {
+        if (siteSubscription.CancelSubscription())
+        {
+            Response.Redirect(Href("~/Account/Dashboard/?Msg=Modify"), false);
+            Layout = null;
+            return;
+        }
+    }
+    
+}
+@section head
+{
+	<script src="@Href( "~/Scripts/jquery.validate.min.js" )" type="text/javascript"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        $("#frm").validate(
+			{
+			    messages:
+				{
+				    chkApproveCancel: { required: "required" },
+				}
+			});
+	    });
+	</script>
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+            @if( siteSubscription.ResultCode != Sancsoft.Web.RC.Ok )
+            {
+                <div style="font-weight:bold;color:Red;">@siteSubscription.ResultTitle( )</div>
+                <p style="color:Red;">@siteSubscription.ResultMessage( )</p>
+            }
+            <p>We're sorry to hear that you would like to cancel your Unite This City membership.  Once you cancel, future monthly payments will be stopped and your account will continue to be active through
+                the remainder of your paid subscription.</p>
+            <form id="frm" method="post" class="basicForm">
+                <fieldset style="margin:0px auto;"><legend />
+                    <div>
+                        <label for="chkApproveCancel"></label>
+                        <br />
+                        <input type="checkbox" name="chkApproveCancel" class="required" value="1" style="width:20px; margin:0px; padding:3px 0px 3px 0px; font-size:14px;" /> I wish to cancel my Unite This City membership
+                    </div>
+                    <br style="clear:left;" />
+                    <div class="orangeArrowButtonRight">
+                        <input type="submit" name="_btnSubmit" value="Continue" class="button" />
+                    </div>
+        			<div class="orangeBackButtonRight" style="margin-left:30px;margin-top:10px;"><a href="@Href( "~/Account/Dashboard" )">BACK</a></div>
+                    <br style="clear:both;" />
+                </fieldset>
+            </form>
+		</div>
+		<br style="clear:left;" />
+	</div>

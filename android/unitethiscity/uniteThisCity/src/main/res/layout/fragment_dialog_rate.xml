@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutRateDialogParent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#00FFFFFF" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutRateDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_dialog"
+        android:padding="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutRateDialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#3B3B3B"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp"
+            android:layout_marginBottom="25dp"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/rateDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/dialog_rate"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayoutSignInDialogEmail"
+            android:layout_below="@+id/linearLayoutRateDialogTitle"
+            android:visibility="invisible">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/editTextSignInDialogEmail"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/rounded_corners"
+                android:hint="@string/dialog_sign_in_email_hint"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textColorHint="#bdbdbd"
+                android:textCursorDrawable="@null" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/editTextSignInDialogPassword"
+                android:layout_alignRight="@+id/editTextSignInDialogEmail"
+                android:layout_alignEnd="@+id/editTextSignInDialogEmail"
+                android:layout_alignLeft="@+id/editTextSignInDialogEmail"
+                android:layout_alignStart="@+id/editTextSignInDialogEmail"
+                android:layout_below="@+id/editTextSignInDialogEmail"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/rounded_corners"
+                android:hint="@string/dialog_sign_in_password_hint"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textColorHint="#bdbdbd"
+                android:textCursorDrawable="@null" />
+
+            <RelativeLayout
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayoutSignInDialogSpacer"
+                android:layout_below="@+id/editTextSignInDialogPassword"
+                android:layout_centerHorizontal="true"></RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/dialog_sign_in_cancel"
+                android:id="@+id/btnSignInCancel"
+                android:layout_toLeftOf="@+id/relativeLayoutSignInDialogSpacer"
+                android:layout_below="@+id/editTextSignInDialogPassword"
+                android:background="@drawable/btn_sign_up_email"
+                android:textSize="14sp"
+                android:textColor="#3B3B3B"
+                android:textStyle="bold"
+                android:layout_alignLeft="@+id/editTextSignInDialogPassword"
+                android:layout_alignStart="@+id/editTextSignInDialogPassword"
+                android:layout_marginLeft="10dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/dialog_sign_in_login"
+                android:id="@+id/btnSignInLogin"
+                android:layout_toRightOf="@+id/relativeLayoutSignInDialogSpacer"
+                android:layout_below="@+id/editTextSignInDialogPassword"
+                android:background="@drawable/btn_sign_up_email"
+                android:textSize="14sp"
+                android:textColor="#3B3B3B"
+                android:textStyle="bold"
+                android:layout_alignRight="@+id/editTextSignInDialogPassword"
+                android:layout_marginRight="10dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayoutRateButton"
+            android:layout_below="@+id/linearLayoutRateDialogTitle"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rateBusinessName"
+                android:layout_marginBottom="25dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#3B3B3B"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBarRateDialog"
+                android:layout_centerHorizontal="true"
+                android:numStars="5"
+                style="@style/customRatingBar"
+                android:stepSize="1"
+                android:layout_marginBottom="15dp"
+                android:layout_below="@+id/rateBusinessName" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_rate_tap_stars"
+                android:id="@+id/rateTapStars"
+                android:layout_marginBottom="30dp"
+                android:textColor="#3B3B3B"
+                android:gravity="center_horizontal"
+                android:layout_below="@+id/ratingBarRateDialog" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:text="@string/dialog_rate_done"
+                android:id="@+id/btnRateDone"
+                android:background="@drawable/btn_sign_up_email"
+                android:textSize="16sp"
+                android:textColor="#3B3B3B"
+                android:textStyle="bold"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_marginBottom="25dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/rateTapStars" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:id="@+id/imageViewSignInDialogLogo"
+            android:layout_below="@+id/relativeLayoutRateButton"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/header_logo"
+            android:layout_marginBottom="15dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

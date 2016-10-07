@@ -1,0 +1,109 @@
+﻿@{
+    WebDBContext db = new WebDBContext( );
+
+    Layout = "";
+
+    int catID = WebConvert.ToInt32( Request.Params["ID"], 0 );
+    string keywords = WebConvert.ToString( Request.Params["keywords"], "" ).ToLower( );
+    keywords = ( keywords == "undefined" ) ? "" : keywords;
+
+    // get the current period
+    int perID = Period.IdentifyPeriod( DateTime.Today );
+
+    IEnumerable<VwLocationsList> locations =
+        ( from rows in db.VwLocationsList
+          where
+            rows.BusEnabled == true &&
+            ( (catID != 0 ) ? rows.CatParentID == catID : rows.LocID > 0 ) &&
+            ( ( keywords != "" ) ?
+                ( rows.BusName.ToLower( ).Contains( keywords ) ||
+                rows.LocCity.ToLower( ).Contains( keywords ) ||
+                rows.CatName.ToLower( ).Contains( keywords ) ) : rows.LocID > 0 )
+          orderby rows.BusName
+          select rows );
+}
+@functions{
+    public string GetAssignedDeal( int busID )
+    {
+        WebDBContext db = new WebDBContext( );
+
+        // get the assigned business deal definition id
+        TblBusinesses rsBus = db.TblBusinesses.Single( target => target.BusID == busID );
+
+        // get the assigned deals price
+        TblDealDefinitions rsDld = db.TblDealDefinitions.SingleOrDefault( target => target.DldID == rsBus.BusAssignedDldID );
+        return SiteLocationInfo.FormatDealValue( ( rsDld != null ) ? rsDld.DldAmount : 0, ( rsDld != null ) );
+    }
+    public string GetActiveDeal( int busID, int perID )
+    {
+        WebDBContext db = new WebDBContext( );
+        // get the active deal
+        TblDeals rsDeal = db.TblDeals.SingleOrDefault( target => target.BusID == busID && target.PerID == perID );
+        return SiteLocationInfo.FormatDealValue( ( rsDeal != null ) ? rsDeal.DelAmount : 0, ( rsDeal != null ) );
+    }
+}
+@if ( locations.Any( ) )
+{
+    int count = 0;
+    foreach ( var row in locations )
+    {
+        string formattedPhone = Phone.Format( row.LocPhone );
+        string phoneIconCssClass = ( row.LocPhone == "" || row.LocPhone == "n/a" ) ? "disabled" : "";
+        string websiteIconCssClass = ( row.BusWebsite == "" ) ? "disabled" : "";
+        string facebookIconCssClass = ( row.BusFacebookLink == "" ) ? "disabled" : "";
+        string mapUrl = String.Format( "http://maps.google.com/maps?q={0},{1},{2},{3}", row.LocAddress, row.LocCity, row.LocState, row.LocZip );
+        string phoneUrl = ( row.LocPhone == "" || row.LocPhone == "n/a" ) ? "javascript:void(0);" : String.Format( "tel:{0}", formattedPhone );
+        string websiteUrl = ( row.BusWebsite == "" ) ? "javascript:void(0);" : row.BusWebsite;
+        string facebookUrl = ( row.BusFacebookLink == "" ) ? "javascript:void(0);" : row.BusFacebookLink;
+        <!-- BUSINESS BOX  -->
+        <div class="dashboardBox">
+            <div class="roleBusiness">@row.BusName</div>
+            <div class="dashboardImage"><a href="@Href( "~/Directory/Business/" + row.LocID )"><img src="@SiteBusinessInfo.GetImageUrl(row.BusGuid,false)" width="100" height="100" alt="@row.BusName" /></a></div>
+            <div class="dashboardInfo">
+                <div class="roleDeal">@(GetActiveDeal( row.BusID, perID ))</div>
+                <div class="roleCategory">@(row.CatName)</div>
+                <div class="roleRating"><img src="@Href("~/images/Ratings/rating" + Rating.ImageNumber(row.LocRating) + ".png")" width="72" height="12" alt="" /></div>
+                <div class="roleAddress">@row.LocAddress</div>
+                <div class="roleAddress">@(row.LocCity + ", " + row.LocState + " " + row.LocZip)</div>
+                <div class="roleAddress">@(formattedPhone)</div>
+                <div class="roleLinkIcons">
+                    <a href="@(mapUrl)" target="_blank">
+                        <img class="roleLinkIcon" src="/images/btn_maps.png" alt="" border="0" />
+                    </a>
+                    <a href="@(phoneUrl)" target="_blank" class="visible-mobile">
+                        <img class="roleLinkIcon @(phoneIconCssClass)" src="/images/btn_phone.png" alt="" border="0" />
+                    </a>
+                    <a href="@(websiteUrl)" target="_blank">
+                        <img class="roleLinkIcon @(websiteIconCssClass)" src="/images/btn_website.png" alt="" border="0" />
+                    </a>
+                    <a href="@(facebookUrl)" target="_blank">
+                        <img class="roleLinkIcon @(facebookIconCssClass)" src="/images/btn_facebook.png" alt="" border="0" />
+                    </a>
+                </div>
+            </div>
+            <br style="clear:left;" />
+        </div>
+        if ( count == 1 )
+        {
+            <br style="clear:left;" />
+            count = 0;
+        }
+        else
+        {
+            count = count + 1;
+        }
+
+    }
+    <br style="clear:left;" />
+}
+else
+{
+    if ( keywords != "" )
+    {
+        <div>No businesses were found matching "<em>@(keywords)</em>".</div>
+    }
+    else
+    {
+        <div>No businesses were found.</div>
+    }
+}

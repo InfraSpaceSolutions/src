@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutRedeem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/crumbContextRedeem"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/crumb_bar_fixed"
+        android:gravity="center"
+        android:paddingBottom="2dp"
+        android:text="@string/redeem_business"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewContextBack"
+        android:src="@drawable/btn_back"
+        android:layout_alignBottom="@+id/crumbContextRedeem"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="-2dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageViewContextMoreInfo"
+        android:src="@drawable/crumb_more_info"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitEnd"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayoutMoreInfo"
+        android:background="#B2B2B2"
+        android:layout_below="@+id/crumbContextRedeem"
+        android:layout_above="@+id/linearLayoutRedeemBottom"
+        android:touchscreenBlocksFocus="false"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewMoreInfoBusinessName"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/relativeLayoutMoreInfoButtons"
+            android:background="#263238"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:text="@string/redeem_more_info_button_gallery"
+                android:id="@+id/contextMoreInfoButtonGallery"
+                android:background="#757575"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_toLeftOf="@+id/contextMoreInfoButtonMenu"
+                android:layout_toStartOf="@+id/contextMoreInfoButtonMenu"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:text="@string/redeem_more_info_button_menu"
+                android:id="@+id/contextMoreInfoButtonMenu"
+                android:background="#fb8c00"
+                android:textColor="#263238"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="25dp"
+                android:text="@string/redeem_more_info_button_calendar"
+                android:id="@+id/contextMoreInfoButtonCalendar"
+                android:background="#fb8c00"
+                android:textColor="#263238"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/contextMoreInfoButtonMenu"
+                android:layout_toEndOf="@+id/contextMoreInfoButtonMenu"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollViewMoreInfo">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativeLayoutMoreInfo">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/linearLayoutGalleryItems"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/relativeLayoutMenuItems"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/relativeLayoutMenuItemsHeader"
+                        android:layout_marginBottom="5dp"
+                        android:background="#757575"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:text="@string/redeem_more_info_menu_item"
+                            android:id="@+id/textViewMenuItemsHeaderItem"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="false"
+                            android:textColor="#ffffff"
+                            android:textStyle="bold"
+                            android:layout_toLeftOf="@+id/textViewMenuItemsHeaderPrice"
+                            android:layout_toStartOf="@+id/textViewMenuItemsHeaderPrice"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center_vertical|left"
+                            android:paddingLeft="20dp" />
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:text="@string/redeem_more_info_menu_item_price"
+                            android:id="@+id/textViewMenuItemsHeaderPrice"
+                            android:layout_alignParentLeft="false"
+                            android:layout_alignParentTop="false"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_alignParentRight="true" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/linearLayoutMenuItems"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/relativeLayoutMenuItemsHeader">
+
+                        <include
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            layout="@layout/menu_item" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/linearLayoutViewMenuButtonWrapper"
+                        android:padding="7dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#263238"
+                        android:layout_below="@+id/linearLayoutMenuItems"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:text="@string/redeem_more_info_view_menu_online"
+                            android:id="@+id/buttonViewMenu"
+                            android:background="#fb8c00"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:textColor="#263238" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/linearLayoutCalendarItems"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"></LinearLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayoutReview"
+        android:layout_above="@+id/linearLayoutRedeemBottom"
+        android:layout_below="@+id/crumbContextRedeem"
+        android:background="#B2B2B2"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contextLocationNameReview"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/redeem_review"
+            android:id="@+id/contextLocationReviewTitle"
+            android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:background="#616161" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextReview"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="25dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:minHeight="200dp"
+            android:maxHeight="200dp"
+            android:background="@null" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutReviewButtons"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutReviewCancelButtonWrapper"
+                android:padding="7dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/background_button_dark">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/redeem_button_review_cancel"
+                    android:id="@+id/buttonReviewCancel"
+                    android:background="@drawable/background_button_orange"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="#263238" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayoutReviewPostWrapper"
+                android:padding="7dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/background_button_dark">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/redeem_button_review_post"
+                    android:id="@+id/buttonReviewPost"
+                    android:background="@drawable/background_button_orange"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="#263238" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollViewRedeem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayoutRedeemBottom"
+        android:layout_below="@id/crumbContextRedeem"
+        android:background="@drawable/background_middle"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutRedeem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayoutContextLocationNameDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="2dp"
+                android:background="#B2B2B2" >
+
+                <TextView
+                    android:id="@+id/contextLocationName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:gravity="left"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:textColor="@android:color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- background was #663300 -->
+
+			<LinearLayout
+			        android:id="@+id/linearLayoutContextAddressRating"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:background="#616161" >
+
+			        <LinearLayout
+			            android:id="@+id/linearLayoutContextAddress"
+			            android:layout_width="0dp"
+			            android:layout_height="wrap_content"
+			            android:layout_weight="4"
+			            android:orientation="vertical" >
+
+			            <TextView
+			                android:id="@+id/contextAddress"
+			                android:layout_width="match_parent"
+			                android:layout_height="match_parent"
+			                android:ellipsize="end"
+			                android:lines="1"
+			                android:paddingBottom="5dp"
+			                android:paddingLeft="10dp"
+			                android:paddingRight="5dp"
+			                android:paddingTop="5dp"
+			                android:scrollHorizontally="true"
+			                android:singleLine="true"
+			                android:textColor="@android:color/white"
+			                android:textIsSelectable="true"
+                            android:layout_marginRight="10dp" />
+			        </LinearLayout>
+
+			        <ImageView
+			            android:id="@+id/contextRating"
+			            android:layout_width="25dp"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="center"
+			            android:layout_weight="1"
+			            android:contentDescription="@string/redeem_rating_description"
+			            android:minHeight="25dp"
+			            android:minWidth="25dp"
+			            android:paddingLeft="5dp"
+			            android:paddingRight="10dp"
+			            android:scaleType="fitCenter"
+			            android:src="@drawable/rating_four" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutContextCategoryDistance">
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutContextLocationRemainder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B2B2B2"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/contextCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+            		android:ellipsize="end"
+            		android:lines="1"
+            		android:scrollHorizontally="true"
+            		android:singleLine="true"
+                    android:maxWidth="350dp"
+                    android:layout_toLeftOf="@+id/contextDistance"
+                    android:layout_toStartOf="@+id/contextDistance"
+                    android:layout_marginRight="10dp" />
+
+                <TextView
+                    android:id="@+id/contextDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="25dp" />
+
+                <ImageView
+                    android:id="@+id/imageViewContextLocation"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_below="@id/contextCategory"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/location_empty" />
+
+                <TextView
+                    android:id="@+id/contextDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/relativeLayoutBusinessButtons"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/imageViewContextLocation"
+                    android:gravity="left"
+                    android:minHeight="75dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignTop="@+id/imageViewContextLocation"
+                    android:maxHeight="75dp" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutBusinessButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignBottom="@id/imageViewContextLocation"
+                    android:gravity="bottom|center_horizontal"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@+id/imageViewContextLocation"
+                    android:layout_toEndOf="@+id/imageViewContextLocation">
+
+                    <ImageButton
+                        android:id="@+id/imageButtonMaps"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/utc_maps_button"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="false"
+                        android:layout_marginRight="8dp" />
+
+                    <ImageButton
+                        android:id="@+id/imageButtonPhone"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/utc_phone_button"
+                        android:layout_alignParentLeft="false"
+                        android:layout_alignParentTop="false"
+                        android:layout_toRightOf="@+id/imageButtonMaps"
+                        android:layout_marginRight="8dp" />
+
+                    <ImageButton
+                        android:id="@+id/imageButtonWebsite"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/utc_website_button"
+                        android:layout_alignParentLeft="false"
+                        android:layout_alignParentTop="false"
+                        android:layout_toRightOf="@+id/imageButtonPhone"
+                        android:layout_marginRight="8dp" />
+
+                    <ImageButton
+                        android:id="@+id/imageButtonFacebook"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/utc_facebook_button"
+                        android:layout_alignParentLeft="false"
+                        android:layout_alignParentTop="false"
+                        android:layout_toRightOf="@+id/imageButtonWebsite"
+                        android:layout_marginRight="8dp" />
+
+                    <ImageButton
+                        android:id="@+id/imageButtonMoreInfo"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/btn_more_info"
+                        android:visibility="invisible"
+                        android:layout_alignParentLeft="false"
+                        android:layout_alignParentTop="false"
+                        android:layout_toRightOf="@+id/imageButtonFacebook" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/relativeLayoutBusinessButtons"
+                    android:id="@+id/relativeLayoutUTCSocialDeal"
+                    android:layout_marginTop="25dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutContextUTCSocialDealHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="#616161"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/contextUTCSocialDeal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="@string/redeem_utc_social_deal"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/linearLayoutContextUTCSocialDealHeader"
+                        android:background="#263238"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/linearLayoutContextUTCSocialDeal"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/contextAvailableCash"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:paddingBottom="3dp"
+                            android:text="@string/redeem_zero_dollars"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="2dp" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/redeem_status"
+                            android:id="@+id/buttonContextRedemptionStatus"
+                            android:layout_weight="1.8"
+                            android:background="#ffffff"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#f57c00" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/location_redeem"
+                            android:id="@+id/buttonContextRedeem"
+                            android:layout_weight="1.8"
+                            android:background="#fb8c00"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#263238" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/linearLayoutContextUTCSocialDealHeader"
+                        android:background="#263238"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/linearLayoutContextUTCSocialDealRedeemed"
+                        android:visibility="visible">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/location_already_redeemed"
+                            android:id="@+id/buttonContextRedemptionRedeemed"
+                            android:layout_weight="2"
+                            android:background="#ffffff"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#f57c00" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/buttonContextRedemptionRedeemedDate"
+                            android:layout_weight="1"
+                            android:background="#616161"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#bdbdbd" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/linearLayoutUTCSocialDealTerms"
+                        android:layout_below="@+id/linearLayoutContextUTCSocialDeal"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:background="#e0e0e0">
+
+                        <TextView
+                            android:id="@+id/contextTermsAndConditionsSocial"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignLeft="@+id/imageViewCashRibbonRight"
+                            android:layout_alignRight="@+id/imageViewCashRibbonRight"
+                            android:layout_centerVertical="true"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:paddingTop="4dp"
+                            android:text="@string/redeem_terms"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="2dp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/relativeLayoutUTCLoyaltyDeal"
+                    android:layout_below="@+id/relativeLayoutUTCSocialDeal"
+                    android:layout_marginTop="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutContextUTCLoyaltyDealHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="#616161"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/contextUTCLoyaltyDeal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="@string/redeem_utc_loyalty_deal"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/relativeLayoutContextUTCLoyaltyDeal"
+                        android:background="#263238"
+                        android:layout_below="@+id/linearLayoutContextUTCLoyaltyDealHeader">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/contextLoyaltyDescription"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_below="@+id/contextLoyaltyDescription"
+                            android:id="@+id/linearLayoutContextUTCLoyaltyDeal">
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/redeem_status"
+                                android:id="@+id/buttonContextLoyaltyStatus"
+                                android:layout_weight="1.8"
+                                android:background="#ffffff"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:textColor="#f57c00" />
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:text="@string/redeem_earn_point"
+                                android:id="@+id/buttonContextEarnPoint"
+                                android:layout_weight="1"
+                                android:background="#fb8c00"
+                                android:textColor="#263238"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/linearLayoutUTCLoyaltyDealTerms"
+                        android:layout_below="@+id/relativeLayoutContextUTCLoyaltyDeal"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="25dp"
+                        android:background="#e0e0e0">
+
+                        <TextView
+                            android:id="@+id/contextTermsAndConditionsLoyalty"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignLeft="@+id/imageViewCashRibbonRight"
+                            android:layout_alignRight="@+id/imageViewCashRibbonRight"
+                            android:layout_centerVertical="true"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:paddingTop="4dp"
+                            android:text="@string/redeem_terms"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="2dp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/relativeLayoutMemberReviews"
+                    android:layout_below="@+id/relativeLayoutUTCLoyaltyDeal"
+                    android:layout_marginTop="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutContextMemberReviewsHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#616161"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/contextMemberReviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="@string/redeem_member_reviews"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <WebView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/webViewMemberReviews"
+                        android:layout_below="@+id/linearLayoutContextMemberReviewsHeader" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:id="@+id/linearLayoutRedeemBottomStrip"
+        android:layout_above="@+id/linearLayoutRedeemBottom"
+        android:background="#000000"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutRedeemBottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#fdfdfd">
+
+        <ImageView
+            android:id="@+id/imageViewLeaveReview"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:src="@drawable/btn_leave_a_tip"
+            android:scaleType="fitCenter" />
+
+        <ImageView
+            android:id="@+id/imageViewRateIt"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:src="@drawable/btn_rate_it"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <ImageView
+            android:id="@+id/imageViewToggleFavorites"
+            android:layout_width="175dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:src="@drawable/btn_add_to_favorites"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+</RelativeLayout>

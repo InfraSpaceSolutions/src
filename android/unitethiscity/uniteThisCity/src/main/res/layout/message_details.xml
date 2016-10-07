@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutMessageDetails"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="#bdbdbd"
+        android:id="@+id/relativeLayoutMessageDetailsContainer"
+        android:paddingLeft="15dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp">
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/imageViewMessageDetails"
+            android:src="@drawable/location_empty"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/linaerLayoutMessageDetailsSpacer"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMessageDetails"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:orientation="vertical"
+            android:layout_alignBottom="@+id/linaerLayoutMessageDetailsSpacer"
+            android:layout_toEndOf="@+id/imageViewMessageDetails"
+            android:layout_alignTop="@+id/linaerLayoutMessageDetailsSpacer"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="65dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMessageDetailsName"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/messageDetailsFrom"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/message_details_new"
+                    android:id="@+id/textViewMessageDetailsNew"
+                    android:textColor="#ffffff"
+                    android:layout_marginRight="15dp"
+                    android:typeface="monospace"
+                    android:textStyle="bold"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:background="#ffab40"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <!-- background was #663300 -->
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMessageDetailsSummary"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#bdbdbd" >
+
+                <TextView
+                    android:id="@+id/messageDetailsSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="5dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:background="#263238" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/linearLayoutMessageDetailsDateReadMore"
+            android:layout_marginTop="15dp"
+            android:background="#263238"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="false"
+            android:layout_below="@+id/linearLayoutMessageDetails">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/messageDetailsDate"
+                android:background="#757575"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonMessageDetailsReadMore"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#fb8c00"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="#263238"
+                android:text="@string/message_details_read_more" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

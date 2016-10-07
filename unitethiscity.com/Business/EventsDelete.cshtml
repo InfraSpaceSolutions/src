@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Event: Delete");
+
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int evtID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    WebDBContext db = new WebDBContext();
+
+    // get the event to delete
+    TblEvents rsEvt = db.TblEvents.SingleOrDefault(target => target.EvtID == evtID && target.BusID == siteBusiness.BusID);
+
+    // delete any attached event link
+    TblEventLinks rsEventLink = db.TblEventLinks.SingleOrDefault(target => target.EvtID == evtID);
+    if (rsEventLink != null)
+    {
+        db.TblEventLinks.DeleteOnSubmit(rsEventLink);
+    }
+
+
+    // Delete the record
+    db.TblEvents.DeleteOnSubmit(rsEvt);
+    db.SubmitChanges();
+
+    // redirect to the dashboard
+    Response.Redirect(Href("~/Business/Dashboard?msg=Modify"), false);
+    return;
+}

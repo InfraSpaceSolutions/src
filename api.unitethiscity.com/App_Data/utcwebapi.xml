@@ -1,0 +1,2241 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>utcwebapi</name>
+    </assembly>
+    <members>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfig.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,com.unitethiscity.api.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,com.unitethiscity.api.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create one using <see cref="T:com.unitethiscity.api.Areas.HelpPage.ObjectGenerator"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},com.unitethiscity.api.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.#ctor(com.unitethiscity.api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,com.unitethiscity.api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:com.unitethiscity.api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:com.unitethiscity.api.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:com.unitethiscity.api.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.CalendarController">
+            <summary>
+            Get the summary information for one or more events
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CalendarController.Get(System.Int32)">
+            <summary>
+            Get the event summary for all of the upcoming events.  Only returns
+            events for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CalendarController.Factory(com.unitethiscity.api.Models.VwEventsWithLinks)">
+            <summary>
+            Create an event info object from the database record for the location
+            </summary>
+            <param name="rs">event record</param>
+            <returns>event info object</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CalendarController.GetProperties(com.unitethiscity.api.Models.EventInfo)">
+            <summary>
+            Get the properties for an event as an array of strings
+            </summary>
+            <param name="evt">event</param>
+            <returns>array of string of properties</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CategoryController.GetAllCategories">
+            <summary>
+            Get the categories as a 2-level tree in a list, sorted by
+            group first (parent category) and category.  Only retrieves categories
+            that contain one or more locations
+            </summary>
+            <returns>enumerable collection of categories</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.CheckInController">
+            <summary>
+            Processing of member checkin requests
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CheckInController.Post(System.Guid,com.unitethiscity.api.Models.CheckInCredentials)">
+            <summary>
+            Verify the checkin credentials and attempt a checking.  Throws an 
+            error with message if checkin fails; returns 200/204 on success
+            </summary>
+            <param name="token">api token identifying caller</param>
+            <param name="cc">checkin credentials model</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CheckInController.CheckQRForMember(com.unitethiscity.api.Models.CheckInCredentials)">
+            <summary>
+            Check the qr code supplied in the credentials to see if it represents a valid member
+            </summary>
+            <param name="rc">credentials</param>
+            <returns>TRUE if ok for checkin</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CheckInController.CheckQRForBusiness(com.unitethiscity.api.Models.CheckInCredentials)">
+            <summary>
+            Check the qr code supplied in the credentials to see if it represents a valid business
+            </summary>
+            <param name="rc">credentials</param>
+            <returns>TRUE if ok for checkin</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CheckInController.CheckQRForBusinessReferral(com.unitethiscity.api.Models.CheckInCredentials)">
+            <summary>
+            Check the qr code supplied in the credentials to see if it represents a referral code
+            that is configured as valid for business operations
+            </summary>
+            <param name="cs">credentials</param>
+            <returns>TRUE if ok for checkin</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CheckInController.IdentifyMember(com.unitethiscity.api.Models.CheckInCredentials)">
+            <summary>
+            identify the member from the supplied qr code
+            </summary>
+            <param name="cc">credentials supplied for checkin</param>
+            <returns>account id of member</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.CheckInController.ProximityInRange(com.unitethiscity.api.Models.CheckInCredentials)">
+            <summary>
+            Check to see if the action is within the accepted range for the business
+            </summary>
+            <param name="cc">credentials</param>
+            <returns>true if within proximity range for the location</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.DataRevisionController.Get(System.Int32)">
+            <summary>
+            Get the revision level of a data set
+            </summary>
+            <param name="id">identify data revision</param>
+            <returns>Data revision</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.DataRevisionController.Get(System.String)">
+            <summary>
+            Get the revision level of a data set
+            </summary>
+            <param name="name">name of the data revision</param>
+            <returns>Data revision</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.EventContextController">
+            <summary>
+            Controller for retrieving the account's context as a member for a specified location
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.EventContextController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the member context for an event
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify event</param>
+            <returns>event context for specified user</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.EventContextController.Get(System.Int32)">
+            <summary>
+            Get the event context without an associated member account for context
+            </summary>
+            <param name="id">identify event</param>
+            <returns>event details with context of guest user</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.EventInfoController">
+            <summary>
+            Get the summary information for one or more events
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.EventInfoController.GetAllEventInfos">
+            <summary>
+            Get the event summary for all of the upcoming events.  Only returns
+            events for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.EventInfoController.GetEventInfo(System.Int32)">
+            <summary>
+            Get the summary for a specific event.  Works if the business is enabled or not
+            </summary>
+            <param name="id">identify event</param>
+            <returns>event summary</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.EventInfoController.Factory(com.unitethiscity.api.Models.VwEventsWithLinks)">
+            <summary>
+            Create an event info object from the database record for the location
+            </summary>
+            <param name="rs">event record</param>
+            <returns>event info object</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.EventInfoController.GetProperties(com.unitethiscity.api.Models.EventInfo)">
+            <summary>
+            Get the properties for an event as an array of strings
+            </summary>
+            <param name="evt">event</param>
+            <returns>array of string of properties</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.FacebookLoginController">
+            <summary>
+            Controller for authenticating the user account
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FacebookLoginController.Post(com.unitethiscity.api.Models.FacebookLoginCredentials)">
+            <summary>
+            Process login credentials and generate the account context and access token
+            </summary>
+            <param name="lc">account login credentials</param>
+            <returns>api token and account context model</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.FavoriteController">
+            <summary>
+            Enumerate and modify member favorites
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FavoriteController.GetFavorites(System.Guid)">
+            <summary>
+            Retrieve a sorted list of favorite location identifers for a member
+            </summary>
+            <param name="token">user token</param>
+            <returns>List of location identifiers</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FavoriteController.Post(System.Guid,System.Int32)">
+            <summary>
+            Create a member favorite for a location
+            </summary>
+            <param name="token">user token</param>
+            <param name="id">location identifier</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FavoriteController.Delete(System.Guid,System.Int32)">
+            <summary>
+            Delete a favorite record for this location and user pair
+            </summary>
+            <param name="token">user token</param>
+            <param name="id">location identifier</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.Post(com.unitethiscity.api.Models.FreeSignUp2)">
+            <summary>
+            Attempt to create a new account with a free subscription
+            </summary>
+            <param name="jn">sign up form contents</param>
+            <returns>login credentials for the new accountr</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.CleanRequiredField(System.String,System.String,System.Int32)">
+            <summary>
+            Cleans a field (trims it, truncates it).  Verifies that the field is not blank or throws exception.
+            </summary>
+            <param name="name">display name of the field</param>
+            <param name="value">value to test</param>
+            <param name="maxlen">truncate to this length</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.CleanOptionalField(System.String,System.String,System.Int32)">
+            <summary>
+            Cleans a field (trims it, truncates it).  Makes the field blank if not provided
+            </summary>
+            <param name="name">display name of the field</param>
+            <param name="value">value to test</param>
+            <param name="maxlen">truncate to this length</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.IdentifyPromotion(System.String)">
+            <summary>
+            Identify the promotion that goes with the supplied promo code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Promotion # if found and enabled, 0 if not</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.IdentifyReferral(System.String)">
+            <summary>
+            Identify the referral code that goes with the provided promotition code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Referral id or 0 for none</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.NotifyMember(com.unitethiscity.api.Models.TblAccounts)">
+            <summary>
+            Send a notification to the new member with the password information
+            </summary>
+            <param name="rs">Account record</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.NotifyAdministrator(com.unitethiscity.api.Models.FreeSignUp)">
+            <summary>
+            Send a notification to the administrator that a new account has been created
+            </summary>
+            <param name="jn">JoinNow properties</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp2Controller.NotifyAdministrator(com.unitethiscity.api.Models.FreeSignUp2)">
+            <summary>
+            Send a notification to the administrator that a new account has been created
+            </summary>
+            <param name="jn">JoinNow properties</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.Post(com.unitethiscity.api.Models.FreeSignUp3)">
+            <summary>
+            Attempt to create a new account with a free subscription
+            </summary>
+            <param name="jn">sign up form contents</param>
+            <returns>login credentials for the new accountr</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.CleanRequiredField(System.String,System.String,System.Int32)">
+            <summary>
+            Cleans a field (trims it, truncates it).  Verifies that the field is not blank or throws exception.
+            </summary>
+            <param name="name">display name of the field</param>
+            <param name="value">value to test</param>
+            <param name="maxlen">truncate to this length</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.CleanOptionalField(System.String,System.String,System.Int32)">
+            <summary>
+            Cleans a field (trims it, truncates it).  Makes the field blank if not provided
+            </summary>
+            <param name="name">display name of the field</param>
+            <param name="value">value to test</param>
+            <param name="maxlen">truncate to this length</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.IdentifyPromotion(System.String)">
+            <summary>
+            Identify the promotion that goes with the supplied promo code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Promotion # if found and enabled, 0 if not</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.IdentifyReferral(System.String)">
+            <summary>
+            Identify the referral code that goes with the provided promotition code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Referral id or 0 for none</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.NotifyMember(com.unitethiscity.api.Models.TblAccounts)">
+            <summary>
+            Send a notification to the new member with the password information
+            </summary>
+            <param name="rs">Account record</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.NotifyAdministrator(com.unitethiscity.api.Models.FreeSignUp)">
+            <summary>
+            Send a notification to the administrator that a new account has been created
+            </summary>
+            <param name="jn">JoinNow properties</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.NotifyAdministrator(com.unitethiscity.api.Models.FreeSignUp2)">
+            <summary>
+            Send a notification to the administrator that a new account has been created
+            </summary>
+            <param name="jn">JoinNow properties</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUp3Controller.NotifyAdministrator(com.unitethiscity.api.Models.FreeSignUp3)">
+            <summary>
+            Send a notification to the administrator that a new account has been created
+            </summary>
+            <param name="jn">JoinNow properties</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUpController.Post(com.unitethiscity.api.Models.FreeSignUp)">
+            <summary>
+            Attempt to create a new account with a free subscription
+            </summary>
+            <param name="jn">sign up form contents</param>
+            <returns>login credentials for the new accountr</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUpController.CleanRequiredField(System.String,System.String,System.Int32)">
+            <summary>
+            Cleans a field (trims it, truncates it).  Verifies that the field is not blank or throws exception.
+            </summary>
+            <param name="name">display name of the field</param>
+            <param name="value">value to test</param>
+            <param name="maxlen">truncate to this length</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUpController.IdentifyPromotion(System.String)">
+            <summary>
+            Identify the promotion that goes with the supplied promo code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Promotion # if found and enabled, 0 if not</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUpController.IdentifyReferral(System.String)">
+            <summary>
+            Identify the referral code that goes with the provided promotition code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Referral id or 0 for none</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUpController.NotifyMember(com.unitethiscity.api.Models.TblAccounts)">
+            <summary>
+            Send a notification to the new member with the password information
+            </summary>
+            <param name="rs">Account record</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.FreeSignUpController.NotifyAdministrator(com.unitethiscity.api.Models.FreeSignUp)">
+            <summary>
+            Send a notification to the administrator that a new account has been created
+            </summary>
+            <param name="jn">JoinNow properties</param>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.GalleryController">
+            <summary>
+            Get the summary information for one or more locations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.GalleryController.Get(System.Int32)">
+            <summary>
+            Get the ordered gallery of images for a business
+            </summary>
+            <param name="id">business identifier</param>
+            <returns>gallery items order by sequence</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.GalleryController.Factory(com.unitethiscity.api.Models.TblGalleryItems)">
+            <summary>
+            Create a gallery item from a record
+            </summary>
+            <param name="rs">database record</param>
+            <returns>model</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.InboxMessageController.GetAllMessages(System.Guid)">
+            <summary>
+            Get all messages in the account inbox
+            </summary>
+            <param name="token">identify account</param>
+            <returns>array of inbox message objects</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.InboxMessageController.GetMessage(System.Guid,System.Int32)">
+            <summary>
+            Get a single message in the account inbox
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">target message identifier</param>
+            <returns></returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.LocationContextController">
+            <summary>
+            Controller for retrieving the account's context as a member for a specified location
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationContextController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the member context for a location
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify location</param>
+            <returns>location context for specified user</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationContextController.Get(System.Int32)">
+            <summary>
+            Get the location context without an associated member account for context
+            </summary>
+            <param name="id">identify location</param>
+            <returns>location details with context of guest user</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationContextController.GetProperties(com.unitethiscity.api.Models.LocationContext)">
+            <summary>
+            Get the properties for a location context as an array of strings
+            </summary>
+            <param name="loc">location context for properties</param>
+            <returns>array of strings for properties</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.LocationSummaryController">
+            <summary>
+            Get the summary information for one or more locations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationSummaryController.GetAllLocationSummaries(System.Guid)">
+            <summary>
+            Get the location summary for all of teh locations.  Only returns
+            locations for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationSummaryController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the location summary with the context information for an associated account
+            </summary>
+            <param name="token">identify user</param>
+            <param name="id">identify location</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationSummaryController.Get(System.Int32)">
+            <summary>
+            Get the location summary without a member account for context
+            </summary>
+            <param name="id"></param>
+            <returns>location with summary info for context</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationSummaryController.Factory(com.unitethiscity.api.Models.VwLocations,com.unitethiscity.api.Models.VwDeals,com.unitethiscity.api.Models.VwRedemptions,com.unitethiscity.api.Models.VwCheckIns)">
+            <summary>
+            Create a location summary from the component database records
+            </summary>
+            <param name="rs">location </param>
+            <param name="del">deal - may be null</param>
+            <param name="red">redemption - may be null</param>
+            <param name="chk">check in - may be null</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationSummaryController.GetProperties(com.unitethiscity.api.Models.LocationSummary)">
+            <summary>
+            Get the properties for a location as an array of strings
+            </summary>
+            <param name="loc">identify location</param>
+            <returns>array of string of properties</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.LoginController">
+            <summary>
+            Controller for authenticating the user account
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LoginController.Post(com.unitethiscity.api.Models.LoginCredentials)">
+            <summary>
+            Process login credentials and generate the account context and access token
+            </summary>
+            <param name="lc">account login credentials</param>
+            <returns>api token and account context model</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.LocationInfoController">
+            <summary>
+            Get the summary information for one or more locations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationInfoController.GetAllLocationInfos">
+            <summary>
+            Get the location summary for all of teh locations.  Only returns
+            locations for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationInfoController.GetLocationInfo(System.Int32)">
+            <summary>
+            Get the summary for a specific location.  Works if the location is enabled or not
+            </summary>
+            <param name="id">identify location</param>
+            <returns>location summary</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationInfoController.Factory(com.unitethiscity.api.Models.VwLocations)">
+            <summary>
+            Create a location info object from the database record for the location
+            </summary>
+            <param name="rs">locations view record</param>
+            <returns>location info object</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LocationInfoController.GetProperties(com.unitethiscity.api.Models.LocationInfo)">
+            <summary>
+            Get the properties for a location as an array of strings
+            </summary>
+            <param name="loc">identify location</param>
+            <returns>array of string of properties</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.LogoutController">
+            <summary>
+            Controller for disabling authentication tokens
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.LogoutController.Post(com.unitethiscity.api.Models.APIToken)">
+            <summary>
+            Invalidate the supplied API token.  Needs to have email, account id and token in token object.
+            </summary>
+            <param name="tok">token object</param>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.MenuController">
+            <summary>
+            Get the menu items for a business
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.MenuController.Get(System.Int32)">
+            <summary>
+            Get the menu items for a business
+            </summary>
+            <param name="id">business</param>
+            <returns>array of menu items in defined sequence</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.ProximityActionController">
+            <summary>
+            Controller for support of proximity-based actions
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityActionController.Post(System.Guid,com.unitethiscity.api.Models.ProximityActionCredentials)">
+            <summary>
+            Process the proximity action request
+            </summary>
+            <param name="token">identify account</param>
+            <param name="pac">credentials for unified action</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityActionController.IdentifyActiveDeal(System.Int32)">
+            <summary>
+            Get the id of the active deal for the specified business
+            </summary>
+            <param name="busid">target business</param>
+            <returns>deal id; 0= no deal</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityActionController.CheckQRForBusiness(System.Int32,com.unitethiscity.api.Models.ProximityActionCredentials)">
+            <summary>
+            Check the qr code for identification of the busines in the request
+            </summary>
+            <param name="busid">business identifier</param>
+            <param name="pac">credentials supplied for the redemption</param>
+            <returns>true if qr code is valid for redeeming per credentials</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityActionController.CheckQRForBusinessReferral(System.Int32,com.unitethiscity.api.Models.ProximityActionCredentials,System.Boolean@,System.Boolean@)">
+            <summary>
+            Check the qr code supplied in the credentials to see if it represents a referral code
+            that is configured as valid for business operations
+            </summary>
+            <param name="busid">business identifier</param>
+            <param name="pac">credentials</param>
+            <param name="allowCheckin">if valid, can it be used to redeem</param>
+            <param name="allowRedeem">if valid, can it be used to redeem</param>
+            <returns>TRUE if ok for checkin</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityActionController.PerformCheckin(com.unitethiscity.api.Models.ProximityActionCredentials,System.Int32,System.Int32)">
+            <summary>
+            Perform a check-in action; throws error if it fails
+            </summary>
+            <param name="pac">credentials</param>
+            <param name="busID">business</param>
+            <param name="locID">location</param>
+            <returns>true if checked in</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityActionController.PerformRedeem(com.unitethiscity.api.Models.ProximityActionCredentials,System.Int32,System.Int32)">
+            <summary>
+            Perform a redeem action; throws errors if it fails
+            </summary>
+            <param name="pac">credentials</param>
+            <param name="busID">identify business</param>
+            <param name="delID">identify deal</param>
+            <returns>true if redeemed</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityController.Post(System.Guid,com.unitethiscity.api.Models.Proximity)">
+            <summary>
+            Update the location of a device in order to support delivery of 
+            proximity notifications
+            </summary>
+            <param name="token">identify account</param>
+            <param name="prox">identify device by token and specify location</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.ProximityController.NormalizeDeviceID(System.String)">
+            <summary>
+            Normalize a push token device identifier string - uppercase hex digits only
+            </summary>
+            <param name="raw">raw device identifier</param>
+            <returns>normalized device identifier</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushNotificationController.Post(System.Guid,com.unitethiscity.api.Models.PushNotification)">
+            <summary>
+            Process the request to create a push notification
+            </summary>
+            <param name="token">identify account</param>
+            <param name="pn">push notification</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.Post(System.Guid,com.unitethiscity.api.Models.PushToken)">
+            <summary>
+            Process the request to create a push token
+            </summary>
+            <param name="token">identify account</param>
+            <param name="pt">definition of push token to create</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.GetAll(System.Guid)">
+            <summary>
+            Return all of the push tokens associated with the authenticated user
+            </summary>
+            <param name="token">identify account</param>
+            <returns>List of Push Tokens</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.Get(System.Guid,System.Int32)">
+            <summary>
+            Return a specific push token by idany user validated user can retrieve any
+            defined token - not sure if that is a good idea but we need to be able to check the
+            availability since devices could be shared and they will only have one push token 
+            assigned by push provider
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify token</param>
+            <returns>Push Tokens</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.Get(System.Guid,System.String)">
+            <summary>
+            Return a specific push token by token; any user validated user can retrieve any
+            defined token - not sure if that is a good idea but we need to be able to check the
+            availability since devices could be shared and they will only have one push token 
+            assigned by push provider
+            </summary>
+            <param name="token">identify account</param>
+            <param name="pt">push token string</param>
+            <returns>Push Tokens</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.Delete(System.Guid,System.Int32)">
+            <summary>
+            Delete a push token.  Token must be associated with this account
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify token</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.Put(System.Guid,com.unitethiscity.api.Models.PushToken)">
+            <summary>
+            Update a push token
+            </summary>
+            <param name="token">identify account</param>
+            <param name="pt">definition of push token to update</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.Factory(com.unitethiscity.api.Models.TblPushTokens)">
+            <summary>
+            Create a push token object from a push token record
+            </summary>
+            <param name="rs">push token record</param>
+            <returns>push token object</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.PushTokenController.NormalizeDeviceID(System.String)">
+            <summary>
+            Normalize a push token device identifier string - uppercase hex digits only
+            </summary>
+            <param name="raw">raw device identifier</param>
+            <returns>normalized device identifier</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.RatingController">
+            <summary>
+            Controller for reading/writing ratings
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RatingController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the account's rating for a location
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify location</param>
+            <returns>Rating 0-5, 0-Unrated, 1-5=location rating for account</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RatingController.Post(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Set the account's rating for a location
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify location</param>
+            <param name="rating">rating to assign</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RatingController.Delete(System.Guid,System.Int32)">
+            <summary>
+            Remove an account's rating for a location
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify location</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RatingController.Recalculate(System.Int32)">
+            <summary>
+            Recalculate the overall ratings at the business and location levels when a rating is changed
+            </summary>
+            <param name="locID">identify location</param>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.RedeemController">
+            <summary>
+            Controller for support of account redeem actions
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RedeemController.Post(System.Guid,com.unitethiscity.api.Models.RedeemCredentials)">
+            <summary>
+            Process the request to redeem a deal
+            </summary>
+            <param name="token">identify account</param>
+            <param name="rc">credentials for redemption</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RedeemController.CheckQRForMember(com.unitethiscity.api.Models.RedeemCredentials)">
+            <summary>
+            Check the qr code for identification of the member in the credentials
+            </summary>
+            <param name="rc">credentials supplied for redemption</param>
+            <returns>true if qr code is valid for redeeming per credentials</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RedeemController.CheckQRForBusiness(com.unitethiscity.api.Models.RedeemCredentials)">
+            <summary>
+            Chec the qr code for identification of the busines in the redemption request
+            </summary>
+            <param name="rc">credentials supplied for the redemption</param>
+            <returns>true if qr code is valid for redeeming per credentials</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RedeemController.CheckQRForBusinessReferral(com.unitethiscity.api.Models.RedeemCredentials)">
+            <summary>
+            Check the qr code supplied in the credentials to see if it represents a referral code
+            that is configured as valid for business operations
+            </summary>
+            <param name="rc">credentials</param>
+            <returns>TRUE if ok for checkin</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RedeemController.IdentifyActiveDeal(System.Int32)">
+            <summary>
+            Get the id of the active deal for the specified business
+            </summary>
+            <param name="locid">target location</param>
+            <returns>deal id; 0= no deal</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RedeemController.IdentifyMember(com.unitethiscity.api.Models.RedeemCredentials)">
+            <summary>
+            identify the member from the supplied qr code
+            </summary>
+            <param name="rc">credentials supplied for redemption</param>
+            <returns>account id of member</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.RedeemController.ProximityInRange(com.unitethiscity.api.Models.RedeemCredentials)">
+            <summary>
+            Check to see if the action is within the accepted range for the business
+            </summary>
+            <param name="rc">position in redeem credentials</param>
+            <returns>true if within proximity range for the location</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SocialPostController.Post(System.Guid,com.unitethiscity.api.Models.SocialPost)">
+            <summary>
+            Process the request to create a social post reference
+            </summary>
+            <param name="token">identify account</param>
+            <param name="sop">definition of social post</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatCheckInController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the location summary for all of teh locations.  Only returns
+            locations for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatCheckInController.GetScopedCheckIns(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Get the checkins in a scoped timeframe
+            </summary>
+            <param name="token">access</param>
+            <param name="id">business</param>
+            <param name="scopeid">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatCheckInController.GetUserScopedRedemptions(System.Guid,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get the redemptions in a scoped timeframe for a single account
+            </summary>
+            <param name="token">access</param>
+            <param name="id">business</param>
+            <param name="accID">account</param>
+            <param name="scopeid">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatFavoriteController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the location summary for all of teh locations.  Only returns
+            locations for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatPermissionsController.Get(System.Guid)">
+            <summary>
+            Get the menu items for a business
+            </summary>
+            <param name="token">user identifier</param>
+            <returns>array of menu items in defined sequence</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatRatingController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the location summary for all of teh locations.  Only returns
+            locations for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.StatRedemptionController">
+            <summary>
+            Get the redemptions for a business
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatRedemptionController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the redemptions for a business
+            </summary>
+            <param name="token">access token</param>
+            <param name="id">business</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatRedemptionController.GetScopedRedemptions(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Get the redemptions in a scoped timeframe
+            </summary>
+            <param name="token">access</param>
+            <param name="id">business</param>
+            <param name="scopeid">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatRedemptionController.GetUserScopedRedemptions(System.Guid,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get the redemptions in a scoped timeframe for a single account
+            </summary>
+            <param name="token">access</param>
+            <param name="id">business</param>
+            <param name="accID">account</param>
+            <param name="scopeid">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.StatTipController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the location summary for all of teh locations.  Only returns
+            locations for enabled businesses
+            </summary>
+            <returns>list of location information</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.Post(com.unitethiscity.api.Models.JoinNow)">
+            <summary>
+            Attempt to create a new account and subscription through Authorize.net
+            </summary>
+            <param name="jn">sign up form contents</param>
+            <returns>login credentials for the new accountr</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.Delete(System.Guid,com.unitethiscity.api.Models.LoginCredentials)">
+            <summary>
+            Cancel a subscription by sending a delete with matching login credentials
+            </summary>
+            <param name="token">identify account</param>
+            <param name="lc">credentials to confirm delete</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.GetPassword(System.String)">
+            <summary>
+            Request the password be delivered to the email address for an account
+            </summary>
+            <param name="emailAddress">email address of account for request password</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.CleanRequiredField(System.String,System.String,System.Int32)">
+            <summary>
+            Cleans a field (trims it, truncates it).  Verifies that the field is not blank or throws exception.
+            </summary>
+            <param name="name">display name of the field</param>
+            <param name="value">value to test</param>
+            <param name="maxlen">truncate to this length</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.IdentifyPromotion(System.String)">
+            <summary>
+            Identify the promotion that goes with the supplied promo code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Promotion # if found and enabled, 0 if not</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.IdentifyReferral(System.String)">
+            <summary>
+            Identify the referral code that goes with the provided promotition code
+            </summary>
+            <param name="code">code for evaluation</param>
+            <returns>Referral id or 0 for none</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.NotifyMember(com.unitethiscity.api.Models.TblAccounts)">
+            <summary>
+            Send a notification to the new member with the password information
+            </summary>
+            <param name="rs">Account record</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.NotifyAdministrator(com.unitethiscity.api.Models.JoinNow)">
+            <summary>
+            Send a notification to the administrator that a new account has been created
+            </summary>
+            <param name="jn">JoinNow properties</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SubscriptionController.NotifyCancellation(com.unitethiscity.api.Models.LoginCredentials,com.unitethiscity.api.Models.TblSubscriptions)">
+            <summary>
+            Send an email notification for a cancellation of a subscription
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.SummaryAnalyticsController">
+            <summary>
+            Get the summary information for one or more locations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryAnalyticsController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the summary statistics for a business
+            </summary>
+            <param name="token">user token</param>
+            <param name="id">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryAnalyticsController.Get(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Get the summary statistics for a business
+            </summary>
+            <param name="token">user token</param>
+            <param name="id">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <param name="busID">target business identifier</param>
+            <returns></returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.SummaryCheckInsController">
+            <summary>
+            Get the summary information for one or more locations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryCheckInsController.Get(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Get the summary redemptions for a business and timeframe
+            </summary>
+            <param name="token">user token</param>
+            <param name="id">business</param>
+            <param name="scopeid">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <returns></returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.SummaryRedemptionsController">
+            <summary>
+            Get the summary information for one or more locations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryRedemptionsController.Get(System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Get the summary redemptions for a business and timeframe
+            </summary>
+            <param name="token">user token</param>
+            <param name="id">business</param>
+            <param name="scopeid">1=today, 2=past week, 3=this period, 4=last period, 5=all-time; defaults to all-time</param>
+            <returns></returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.SummaryStatsController">
+            <summary>
+            Get the summary information for one or more locations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.Get(System.Guid,System.Int32)">
+            <summary>
+            Get the summary statistics for a business
+            </summary>
+            <param name="token">user token</param>
+            <param name="id">business identifier</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.CountRedemptions(System.DateTime,System.DateTime)">
+            <summary>
+            Count the number of redemptions in a time window
+            </summary>
+            <param name="startTS">start time (inclusive)</param>
+            <param name="endTS">end time (not inclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.CountCheckins(System.DateTime,System.DateTime)">
+            <summary>
+            Count the number of checkins in a time window
+            </summary>
+            <param name="startTS">start time (inclusive)</param>
+            <param name="endTS">end time (not inclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.CountFavorites(System.DateTime,System.DateTime)">
+            <summary>
+            Count the number of favorites in a time window
+            </summary>
+            <param name="startTS">start time (inclusive)</param>
+            <param name="endTS">end time (not inclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.CountRatings(System.DateTime,System.DateTime)">
+            <summary>
+            Count the number of ratings in a time window
+            </summary>
+            <param name="startTS">start time (inclusive)</param>
+            <param name="endTS">end time (not inclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.CountTips(System.DateTime,System.DateTime)">
+            <summary>
+            Count the number of tips in a time window
+            </summary>
+            <param name="startTS">start time (inclusive)</param>
+            <param name="endTS">end time (not inclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.CountSocial(System.DateTime,System.DateTime)">
+            <summary>
+            Count the number of social posts in a time window
+            </summary>
+            <param name="startTS">start time (inclusive)</param>
+            <param name="endTS">end time (not inclusive)</param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.SummaryStatsController.CalculateSummaryStats">
+            <summary>
+            Generate the summary stats for the business
+            </summary>
+            <returns>List of summary stats</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.TipController">
+            <summary>
+            Controller for supporting of reading and updating of tips
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.TipController.Get(System.Guid,System.Int32)">
+            <summary>
+            Retrieve an account's tip for a location; if no tip is found, a blank one
+            is returned
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify location</param>
+            <returns>account's tip for location</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.TipController.Post(System.Guid,com.unitethiscity.api.Models.LocationTip)">
+            <summary>
+            Store the account's tip for a location
+            </summary>
+            <param name="token">identify account</param>
+            <param name="lt">tip model</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.TipController.Delete(System.Guid,System.Int32)">
+            <summary>
+            Remove the account's tip for a location.  If no tip is found, just returns, does not throw error.
+            </summary>
+            <param name="token">identify account</param>
+            <param name="id">identify location</param>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.UnifiedActionController">
+            <summary>
+            Controller for support of account redeem actions
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.Post(System.Guid,com.unitethiscity.api.Models.UnifiedActionCredentials)">
+            <summary>
+            Process the unified action request
+            </summary>
+            <param name="token">identify account</param>
+            <param name="uac">credentials for unified action</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.IdentifyBusinessFromQR(com.unitethiscity.api.Models.UnifiedActionCredentials)">
+            <summary>
+            Identify the target business from the QR code that was scanned
+            </summary>
+            <param name="uac">unified action credentials</param>
+            <returns>business id or 0 if not identified</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.FindBestLocation(System.Int32,com.unitethiscity.api.Models.UnifiedActionCredentials)">
+            <summary>
+            Select a location for the business based on the credentials;
+            This just finds the nearest location.
+            </summary>
+            <param name="busid">target business</param>
+            <param name="uac">unified action credentials</param>
+            <returns>location id or 0 if not identified</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.IdentifyActiveDeal(System.Int32,com.unitethiscity.api.Models.UnifiedActionCredentials)">
+            <summary>
+            Get the id of the active deal for the specified business
+            </summary>
+            <param name="busid">target business</param>
+            <param name="uac">unified action credentials</param>
+            <returns>location id or 0 if not identified</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.CheckQRForBusiness(System.Int32,com.unitethiscity.api.Models.UnifiedActionCredentials)">
+            <summary>
+            Check the qr code for identification of the busines in the request
+            </summary>
+            <param name="busid">business identifier</param>
+            <param name="uac">credentials supplied for the redemption</param>
+            <returns>true if qr code is valid for redeeming per credentials</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.CheckQRForBusinessReferral(System.Int32,com.unitethiscity.api.Models.UnifiedActionCredentials,System.Boolean@,System.Boolean@)">
+            <summary>
+            Check the qr code supplied in the credentials to see if it represents a referral code
+            that is configured as valid for business operations
+            </summary>
+            <param name="busid">business identifier</param>
+            <param name="uac">credentials</param>
+            <param name="allowCheckin">if valid, can it be used to redeem</param>
+            <param name="allowRedeem">if valid, can it be used to redeem</param>
+            <returns>TRUE if ok for checkin</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.PerformCheckin(com.unitethiscity.api.Models.UnifiedActionCredentials,System.Int32,System.Int32)">
+            <summary>
+            Perform a check-in action; throws error if it fails
+            </summary>
+            <param name="uac">credentials</param>
+            <param name="busID">business</param>
+            <param name="locID">location</param>
+            <returns>true if checked in</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.UnifiedActionController.PerformRedeem(com.unitethiscity.api.Models.UnifiedActionCredentials,System.Int32,System.Int32)">
+            <summary>
+            Perform a redeem action; throws errors if it fails
+            </summary>
+            <param name="uac">credentials</param>
+            <param name="busID">identify business</param>
+            <param name="delID">identify deal</param>
+            <returns>true if redeemed</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.VersionController">
+            <summary>
+            Controller for identifying the api version
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.VersionController.Get">
+            <summary>
+            Read the version of the api to check for compatiblity
+            </summary>
+            <returns>api version model (major, minor, patch)</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Controllers.WalletController">
+            <summary>
+            Controller for accessing account wallet information
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.WalletController.Get(System.Guid)">
+            <summary>
+            Read the wallet for a specific account - must match the requesting
+            account
+            </summary>
+            <param name="token">identify account</param>
+            <returns>wallet context - current status of points and redeemable offers</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Controllers.WalletController.Get">
+            <summary>
+            Get the wallet context for the default/guest user - this is used to find out what they could get if they were a member
+            </summary>
+            <returns>wallet context for default/guest user</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.APIToken.IdentifyAccount(com.unitethiscity.api.Models.WebDBContext,System.Guid)">
+            <summary>
+            Identify the account from the supplied api token
+            </summary>
+            <param name="db">database context</param>
+            <param name="token">guid for access</param>
+            <returns>account id</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.AuthNetARB">
+            <summary>
+            Summary description for AuthNetARB
+            </summary>
+        </member>
+        <member name="F:com.unitethiscity.api.Models.AuthNetARB.subscriptionGateway">
+            <summary>
+            Connection to Authorize.net; lazy creation - it is null until needed
+            </summary>
+        </member>
+        <member name="F:com.unitethiscity.api.Models.AuthNetARB.billAddr">
+            <summary>
+            Billing address variable used by create and update calls
+            </summary>
+        </member>
+        <member name="F:com.unitethiscity.api.Models.AuthNetARB.login">
+            <summary>
+            Authorize.net account login
+            </summary>
+        </member>
+        <member name="F:com.unitethiscity.api.Models.AuthNetARB.transactionKey">
+            <summary>
+            Authorize.net transcation api key
+            </summary>
+        </member>
+        <member name="F:com.unitethiscity.api.Models.AuthNetARB.mode">
+            <summary>
+            Mode of operation - test or live
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.ErrorMessage">
+            <summary>
+            Raw error message from authorize.net for evaluation
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.SubscriptionID">
+            <summary>
+            Identifies a subscription to Authorize.NET; set to effect a target
+            subscription, or get when a new subscription is created
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.SubscriptionEMail">
+            <summary>
+            Email address associated with the subscription
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.SubscriptionName">
+            <summary>
+            The name of the subscription
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.SubscriptionPrice">
+            <summary>
+            The cost of the subscription
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.CardNumber">
+            <summary>
+            Credit card number
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.CardCode">
+            <summary>
+            Credit card CVV2 code
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.CardExpirationMonth">
+            <summary>
+            Credit card expiration month
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.CardExpirationYear">
+            <summary>
+            Credit card expiration year
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.AuthNetARB.StartDate">
+            <summary>
+            Start date for the subscription
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.#ctor(System.Boolean)">
+            <summary>
+            Create an authorize.net recurring billing gateway for use
+            </summary>
+            <param name="testMode">true - operate in test mode, which is useless</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.CancelSubscription(System.String)">
+            <summary>
+            Cancel the specified subscription
+            </summary>
+            <param name="subscriptionID">identify subscription</param>
+            <returns>true - cancel successful</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.CreateSubscription">
+            <summary>
+            Create a new subscription on Authorize.net.  The billing address and card properites
+            on the object must be updated with the information to be sent with the request.
+            </summary>
+            <returns>true - update successful</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.GetSubscriptionStatus(System.String)">
+            <summary>
+            Gets the string status of a subscription on Authorize.net ARB.
+            </summary>
+            <param name="subscriptionID">identify subscription</param>
+            <returns>string status code from Auth.net or "Invalid" if cant retrieve</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.UpdateSubscription(System.String)">
+            <summary>
+            Update the billing information associated with a subscription.  The billing address
+            and card properties on the object must be updated with the information to be sent with the update.
+            </summary>
+            <returns>true - update successful</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.AcquireSubscriptionGateway">
+            <summary>
+            Lazy creation of the subscription gateway object
+            </summary>
+            <returns>new or existing subscription gateway</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.ClearError">
+            <summary>
+            Clear any current error message on the object
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.AuthNetARB.AssignFromDatabase(com.unitethiscity.api.Models.VwSubscriptions)">
+            <summary>
+            Assign the billing address information from a subscription database record
+            </summary>
+            <param name="rsSub">subscription databse record</param>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CheckInCredentials.AccId">
+            <summary>
+            Identifies the account making the request
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CheckInCredentials.RolId">
+            <summary>
+            Role of account making the request. Ex. members can request a checkin, businesses can check members in
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CheckInCredentials.LocId">
+            <summary>
+            Specifies the location for the checkin
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CheckInCredentials.MemberAccId">
+            <summary>
+            Account id of the member to check in, which matches the accid for member self-checkins or is the target member for business check ins
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CheckInCredentials.Qurl">
+            <summary>
+            The complete url found in the qr code that was scanned for check in, if applicable.
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CheckInCredentials.Latitude">
+            <summary>
+            Physical location of the check in for validation if required based on business/location
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CheckInCredentials.Longitude">
+            <summary>
+            Physical location of the check in for validation if required based on business/location
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.CreditCardUtility">
+            <summary>
+            A collection of utilities for dealing with credit cards
+            </summary>
+        </member>
+        <member name="F:com.unitethiscity.api.Models.CreditCardUtility.cardNumber">
+            <summary>
+            Credit card number for checking
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CreditCardUtility.CardExpMonth">
+            <summary>
+            Credit card expiration month number 1-12
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CreditCardUtility.CardExpYear">
+            <summary>
+            Credit card expiration year - should be a four digit year
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.CreditCardUtility.CardType">
+            <summary>
+            Credit card type - note: this can be inferred from number
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.#ctor">
+            <summary>
+            Create a credit card utility object for checking the properties with
+            default values.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.#ctor(System.String,System.Int32,System.Int32,com.unitethiscity.api.Models.CreditCardUtility.CardTypes)">
+            <summary>
+            Create a credit card utility object for checking the properties parametrically
+            </summary>
+            <param name="accountNumber">card number as a string</param>
+            <param name="expMonth">expiration month 1-12</param>
+            <param name="expYear">expiration year </param>
+            <param name="ct"></param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.Check(System.Boolean)">
+            <summary>
+            Check all of the credit card information assigned to the object. The following checks are performed:
+            - card number is valid for card type or can be detected
+            - card number passes LUHN test
+            - expiration date is valid
+            - card has not yet expired
+            </summary>
+            <param name="detectCardType">false=use assigned card type; true=attempt to detect card type</param>
+            <returns>CardResults error code; OK for no error</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.ExpungedCardNumber">
+            <summary>
+            Get the card number in an expunged format
+            </summary>
+            <returns>expunged version of card number</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.CardTypeName(com.unitethiscity.api.Models.CreditCardUtility.CardTypes)">
+            <summary>
+            Convert a card type to a displayable string
+            </summary>
+            <param name="cardType">card type identifier</param>
+            <returns>string version of card type</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.CheckLUHN(System.String)">
+            <summary>
+            Perform the LUHN check on the credit card. 
+            </summary>
+            <param name="rawAccount">account number to check</param>
+            <returns>true if passes</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.DetectCardType(System.String)">
+            <summary>
+            Attempt to detect the card type from the supplied account number
+            </summary>
+            <param name="rawAccount">card number to test</param>
+            <returns>card type - Unknown if not detectable</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.CheckCardType(System.String,com.unitethiscity.api.Models.CreditCardUtility.CardTypes)">
+            <summary>
+            Checks to see if the supplied number is valid for the specified card type
+            </summary>
+            <param name="rawAccount">account number</param>
+            <param name="ct">card type</param>
+            <returns>true if card type is valid</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.ExpungeCardNumber(System.String)">
+            <summary>
+            Create an expunged representation of the credit card number supplied
+            Expunged format is basically: ##xx xxxx xxxx #### without spaces
+            </summary>
+            <param name="rawAccount">raw account string</param>
+            <returns>expunged version of card</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.CleanCardNumber(System.String)">
+            <summary>
+            Take a raw card number and clean up the formatting for length and only digits
+            </summary>
+            <param name="rawAccount">raw account string</param>
+            <returns>sanitized account string</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.CreditCardUtility.CheckExpiration(System.Int32,System.Int32)">
+            <summary>
+            Check the expiration date for validity
+            </summary>
+            <param name="month">expiration month 1-12</param>
+            <param name="year">expiration year (four digit year)</param>
+            <returns></returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.Revisioned">
+            <summary>
+            Enumeration of revisionable items
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.DataRevision">
+            <summary>
+            Utility class for handling data revisions
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.DataRevision.GetRevision(com.unitethiscity.api.Models.Revisioned)">
+            <summary>
+            Get the revision of a data set by identifier
+            </summary>
+            <param name="id">identify dataset</param>
+            <returns>revision level, 0 if unknown</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.DataRevision.GetRevision(System.String)">
+            <summary>
+            Get the revision of a data set by name
+            </summary>
+            <param name="name">identify dataset</param>
+            <returns>revision level, 0 if unknown</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.DataRevision.SetRevision(com.unitethiscity.api.Models.Revisioned,System.Int32)">
+            <summary>
+            Set the revision of a data set by id
+            </summary>
+            <param name="id">identify dataset</param>
+            <param name="rev">rev number to assign</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.DataRevision.SetRevision(System.String,System.Int32)">
+            <summary>
+            Set the revision of a data set by name
+            </summary>
+            <param name="name">identify dataset</param>
+            <param name="rev">rev number to assign</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.DataRevision.Bump(com.unitethiscity.api.Models.Revisioned)">
+            <summary>
+            Increase the revision of a data set by id
+            </summary>
+            <param name="id">identify dataset</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.DataRevision.Bump(System.String)">
+            <summary>
+            Increase the revision of a data set by name
+            </summary>
+            <param name="name">identify dataset</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.EMailer.SendStandard(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Send an standard e-mail message from the website
+            </summary>
+            <param name="emlSubject">Subject text for the message</param>
+            <param name="emlBody">Body text for the message</param>
+            <param name="emlAltBody">Alternate body text for the message</param>
+            <param name="emlRecipients">Recipient list for the message separated by a semi-colon (;)</param>
+            <param name="emlReplyTo">List of custom reply-to recipients</param>
+            <param name="emlIsHtml">Sets the mode of email message to html or plain text</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.EMailer.SMTP_Send(System.Net.Mail.MailMessage,System.String)">
+            <summary>
+            Set up the SMTP client and send out an email message
+            </summary>
+            <param name="message">Formatted message to be sent</param>
+            <param name="recipients">Recipient list for the message separated by a semi-colon (;)</param>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.Encryption">
+            <summary>
+            Static class that provides encryption utility operations
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Encryption.CalculatePasswordHash(System.String)">
+            <summary>
+            Calculate the hashed version of the password
+            </summary>
+            <param name="password">clear text password</param>
+            <returns>Hashed password</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Encryption.CalculateMemberHash(System.Int32)">
+            <summary>
+            Calculate the hash for identification of a member
+            </summary>
+            <param name="accid">identify account</param>
+            <returns>encrypted version of account identifier</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Encryption.CalculateBusinessHash(System.Int32)">
+            <summary>
+            Calculate teh hash for the identification of a business
+            </summary>
+            <param name="locid">dentify location</param>
+            <returns>encrypted version of business identifier</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Encryption.CalculateBusinessHashByBusID(System.Int32)">
+            <summary>
+            Calculate teh hash for the identification of a business
+            </summary>
+            <param name="busid">identify business</param>
+            <returns>encrypted version of business identifier</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Encryption.GenerateHash(System.String)">
+            <summary>
+            Calclulate an MD5 encryption of a string
+            </summary>
+            <param name="raw">unencrypted string</param>
+            <returns>encrypted version of raw</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.EventInfo.FormatSortableDate(System.DateTime)">
+            <summary>
+            Format the date as a sortable string
+            </summary>
+            <param name="dt">date</param>
+            <returns>string version of date</returns>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.FacebookLoginCredentials.Account">
+            <summary>
+            Email address associated with the account
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.FacebookLoginCredentials.Passcode">
+            <summary>
+            Shared passcode for facebook logins
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.FacebookLoginCredentials.FacebookId">
+            <summary>
+            Facebook account identifier
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.FreeSignUp.AccGender">
+            <summary>
+            New free account demographics
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.FreeSignUp2.AccGender">
+            <summary>
+            New free account demographics
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.FreeSignUp3.AccGender">
+            <summary>
+            New free account demographics
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.LocationTip.TimestampAsStr">
+            <summary>
+            String version of timestamp for mobile interface since IOS
+            can't handle .NET webapi timestamps
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Logger.LogAction(System.String,System.Int32,System.Int32)">
+            <summary>
+            Log an action
+            </summary>
+            <param name="action">String name of action performed</param>
+            <param name="accID">associated account or 0 for no account</param>
+            <param name="busID">associated business or 0 for no business</param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Logger.DeviceTypeFromUserAgent(System.String)">
+            <summary>
+            Determine the device type from the user agent string.  Very hackish
+            </summary>
+            <param name="agent">user agent provided by browser</param>
+            <returns>device type string (IOS|ANDROID|?)</returns>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.LoginCredentials.Account">
+            <summary>
+            Email address associated with the account
+            </summary>
+        </member>
+        <member name="P:com.unitethiscity.api.Models.LoginCredentials.Password">
+            <summary>
+            Can be supplied unencrypted (clear text) or MD5 hashed per established
+            properties
+            </summary>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.Password">
+            <summary>
+            Static class to support password utility functions
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Password.GenerateRandom(System.Int32)">
+            <summary>
+            GenerateRandom
+            </summary>
+            <param name="len">Length of the password in # of characters</param>
+            <returns>A random password</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Password.GenerateRandom(System.Int32,System.Int32)">
+            <summary>
+            Generate a random password specifying the seed. Useful for generating multiple passwords at the same time.
+            </summary>
+            <param name="len">Length of the password in # of characters</param>
+            <param name="seed">Seed number to generate against</param>
+            <returns>A random password</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Password.Expunge(System.Int32)">
+            <summary>
+            Expunge the characters of a password when writing to the screen
+            </summary>
+            <param name="passlength">Character count of the password</param>
+            <returns>The expunged password</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Period.IdentifyPeriod(System.DateTime)">
+            <summary>
+            Looks up a period and gets the perID if it exists, 0 if it does not
+            </summary>
+            <param name="dt">datetime within period</param>
+            <returns></returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.Phone">
+            <summary>
+            Summary description for Phone
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Phone.Clean(System.String)">
+            <summary>
+            Clean a phone number to just the digits
+            </summary>
+            <param name="rawPhone">string containing phone number</param>
+            <returns>digits only string</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.Phone.Format(System.String)">
+            <summary>
+            Format a phone number in the desired default format
+            +1-123-456-7890
+            </summary>
+            <param name="rawPhone">string of a phone number</param>
+            <returns>formatting string of phone number</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.SiteSettings">
+            <summary>
+            Provides access for accessing and assigning the system settings stored
+            in the database.  Settings have been moved from the application configuration
+            to the database to support access by supporting applications;
+            Note these all throw an exception if the requested setting does not
+            exist.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.SiteSettings.GetValue(System.Int32)">
+            <summary>
+            Get a setting value from the database by id
+            </summary>
+            <param name="setID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.SiteSettings.GetValue(System.String)">
+            <summary>
+            Get a setting value by name
+            </summary>
+            <param name="setName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.SiteSettings.SetValue(System.Int32,System.String)">
+            <summary>
+            Assign a setting by its id
+            </summary>
+            <param name="setID"></param>
+            <param name="setValue"></param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.SiteSettings.SetValue(System.String,System.String)">
+            <summary>
+            Assign a setting by its name
+            </summary>
+            <param name="setName"></param>
+            <param name="setValue"></param>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.SiteSettings.GetFieldType(System.Int32)">
+            <summary>
+            Get the field type for a setting.  Throws if setting doesn't exist
+            </summary>
+            <param name="setID">identify setting</param>
+            <returns>FieldTypes enumerable</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.SiteSettings.GetFieldType(System.String)">
+            <summary>
+            Get the field type for a setting.  Throws if setting doesn't exist
+            </summary>
+            <param name="setName">identify setting</param>
+            <returns>FieldTypes enumerable</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.StatUtility.FormatMemberName(System.String,System.String)">
+            <summary>
+            Format a member name as first name last initial
+            </summary>
+            <param name="fname">nullable first name</param>
+            <param name="lname">nullable last name</param>
+            <returns>Firstname L.</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.WebConvert">
+            <summary>
+            The WebConvert class is a collection of conversion routines designed for use with the web.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToInt32(System.Object,System.Int32)">
+            <summary>
+            Attempt to convert the supplied object to an Int32.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToSingle(System.Object,System.Single)">
+            <summary>
+            Attempt to convert the supplied object to a single-precision float.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToDouble(System.Object,System.Double)">
+            <summary>
+            Attempt to convert the supplied object to a double-precision float.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToDecimal(System.Object,System.Decimal)">
+            <summary>
+            Attempt to convert the supplied object to a decimal.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToLong(System.Object,System.Int64)">
+            <summary>
+            Attempt to convert the supplied object to a long.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToString(System.Object,System.String)">
+            <summary>
+            Attempt to convert the supplied object to a String.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToBoolean(System.Object,System.Boolean)">
+            <summary>
+            Attempt to convert the supplied object to a Boolean.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToDateTime(System.Object,System.DateTime)">
+            <summary>
+            Attempt to convert the supplied object to a DateTime.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.ToDateTime(System.Object,System.Nullable{System.DateTime})">
+            <summary>
+            Attempt to convert the supplied object to a nullable DateTime.
+            </summary>
+            <param name="input">The object to parse.</param>
+            <param name="defaultValue">The default value to use if the conversion fails.</param>
+            <returns>The converted value if the conversion passes, otherwise the default value.</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.CookieValue(System.String)">
+            <summary>
+            Retrieve the value of a cookie by name
+            </summary>
+            <param name="cookieName">Name of the cookie</param>
+            <returns>The stored value of the named cookie if it exists</returns>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.Truncate(System.String,System.Int32)">
+            <summary>
+            Truncate the supplied string to the max length if necessary.
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.Summarize(System.String,System.Int32)">
+            <summary>
+            Truncate the supplied string to the max length if necessary and add an elipsis
+            </summary>
+        </member>
+        <member name="M:com.unitethiscity.api.Models.WebConvert.PreserveBreaks(System.String)">
+            <summary>
+            Preserve carriage returns on the web by converting them to breaks.
+            </summary>
+            <param name="input">The string string containing carriage return breaks.</param>
+            <returns>A string with preserved breaks for the web.</returns>
+        </member>
+        <member name="T:com.unitethiscity.api.Models.WebDBContext">
+            <summary>
+            Local implementation of WebDBContext class additions not generated by SQLMETAL
+            </summary>
+        </member>
+        <member name="T:Roles">
+            <summary>
+            Account Roles
+            defined in TblRoles
+            </summary>
+        </member>
+    </members>
+</doc>

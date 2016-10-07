@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Messages");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    // get the message from the query string ( form submission message )
+    string msg = WebConvert.ToString(Request.QueryString["Msg"], "");
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    WebDBContext db = new WebDBContext();
+    
+    // get the past specials and events
+    IEnumerable<VwMessageJobs> rsMsj = db.VwMessageJobs.Where(target => target.BusID == siteBusiness.BusID).OrderBy(target => target.MsjID);
+
+    // build the webgrid for display of the events
+    WebGrid msjGrid = new WebGrid(rsMsj, fieldNamePrefix: "msj");
+
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Business/Dashboard" )">Business Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@HttpUtility.HtmlEncode(siteBusiness.BusName)</h1>
+            @Html.Raw( Page.SitePage.Body )
+            <!-- MESSAGING -->
+            <h2>Messaging</h2>
+            <p>Messaging allows you to push notifications to UTC members who are fans of your business.  Each business is permitted to send one promotional message per week.  Messages can be sent
+                immediately or scheduled for delivery in the future.
+            </p>
+            <!-- NOTIFICATION BOX -->
+            @if(msg == "Modify")
+            {
+                <div class="NotificationBox Green">
+                    <div class="NotificationMessage">Your business information has been updated</div>
+                    <div class="NotificationClose"></div>
+                </div>
+                <br />
+            }
+            <div id="MsjGridPanel" class="WebGrid">
+            @if( rsMsj.Any() )
+            {
+                @msjGrid.GetHtml(
+                    columns: msjGrid.Columns( 
+                    msjGrid.Column("MsgSummary", "Summary",  format: @<a href="@Href( "~/Business/MessageJob/" + item.MsjID )" title="Edit Message">@WebConvert.Truncate(item.MsgSummary,60)</a>, style:"wgWidth50 wgLeft"),
+                    msjGrid.Column("RolName", "To",  format: @<a href="@Href( "~/Business/MessageJob/" + item.MsjID )" title="Edit Message">@item.RolName</a>, style:"wgWidth15 wgCenter"),
+                    msjGrid.Column("MsjName", "Status",  format: @<a href="@Href( "~/Business/MessageJob/" + item.MsjID )" title="Edit Message">@item.MjsName</a>, style:"wgWidth15 wgCenter"),
+                    msjGrid.Column("MsjSendTS", "Time to Send",  format: @<a href="@Href( "~/Business/MessageJob/" + item.MsjID )" title="Edit Message">@item.MsjSendTS.ToShortDateString() - @item.MsjSendTS.ToShortTimeString()</a>, style:"wgWidth20 wgCenter")
+                ),
+                    tableStyle: "WebGridTable",
+                    headerStyle: "WebGridHeader",
+                    rowStyle: "WebGridRow",
+                    alternatingRowStyle: "WebGridRowAlt",
+                    footerStyle: "WebGridFooter",
+                    emptyRowCellValue: "N/A"
+                )
+            }
+            else
+            {
+                <p>There are currently no messages.</p>
+            }
+            </div>
+            <div style="text-align:right;margin-bottom:10px;">
+                <div class="orangeButton"><a href="@Href( "~/Business/MessageJobNew" )" class="button">New Message</a></div>
+            </div>
+		</div>
+		<br style="clear:left;" />
+	</div>

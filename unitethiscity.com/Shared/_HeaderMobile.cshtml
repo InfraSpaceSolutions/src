@@ -1,0 +1,37 @@
+﻿<div id="mobile-header" class="container">
+    <div class="clearfix">
+        <div id="mobile-menu-icons">
+            <img src="@Href( "~/images/mobile-user-icon.png" )" data-menu="#user-menu-mobile" alt="Log In" />
+            <img src="@Href( "~/images/mobile-menu-icon.png" )" data-menu="#navigationWrapper" alt="Main Menu" />
+        </div>
+        <a href="/" title="Unite This City">
+            <img id="mobile-logo" src="@Href( "~/images/mobile-logo.png" )" alt="Unite This City" />
+        </a>
+    </div>
+</div>
+<div id="user-menu-mobile">
+    @if ( SiteAccount.IsLoggedIn( ) )
+    {
+        <div class="navSection">
+            <a href="/Account">
+                <img src="@SiteAccount.ActiveAvatarURL(24)" width="24" height="24" alt="" style="vertical-align:middle;" />
+                @(CookieManager.SesAccName)
+            </a>
+        </div>
+        <div class="navSection">
+            <a href="/AccountLogout">
+                <span class="glyphicon glyphicon-log-out" style="padding: 0 5px 0 6px;"></span>
+                Logout
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="navSection">
+            <a href="/AccountLogin">Login</a>
+        </div>
+        <div class="navSection">
+            <a href="/JoinUs">Join Today!</a>
+        </div>
+    }
+</div>

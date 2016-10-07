@@ -1,0 +1,54 @@
+﻿@{
+    //Layout = "~/Shared/_Layout.cshtml";
+    Layout = null;
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Terms &amp; Conditions");
+    Page.SitePage.Body = SiteSettings.GetValue("DefaultDealTerms");
+    
+    // identify the location
+    int locID = WebConvert.ToInt32(Request.QueryString["l"], 0);
+    // identify the current period
+    int perID = Period.IdentifyPeriod(DateTime.Now);
+    // get the standard terms and conditions
+    string standardTerms = SiteSettings.GetValue("DefaultDealTerms");
+    
+    WebDBContext db = new WebDBContext();
+
+    // get the specified location
+    VwLocations rsLoc = db.VwLocations.Single(target => target.LocID == locID);
+    
+    // get the active deal
+    VwDeals rsDel = db.VwDeals.SingleOrDefault(target => target.BusID == rsLoc.BusID && target.PerID == perID);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="copyright" content="Copyright (c) 1994-@DateTime.Now.Year - )|( Sanctuary Software Studio, Inc." />
+	<meta charset="utf-8" />
+    <link rel="Shortcut Icon" href="@Href( "~/favicon.ico" )" />
+    <link rel="Stylesheet" href="@Href( "~/Styles/terms2.unitethiscity.css" )" />
+	<script type="text/javascript" src="@Href( "~/Scripts/jquery-1.8.2.min.js" )"></script>
+	<script type="text/javascript" src="@Href( "~/Scripts/utility.js" )"></script>
+	<script type="text/javascript" src="/lib/js/modernizr/modernizr-1.6.min.js"></script>
+
+	<title>@Page.SitePage.Title</title>
+	<meta name="keywords" content="@Page.SitePage.Keywords" />
+	<meta name="description" content="@Page.SitePage.Description" />
+</head>
+<body>
+	<div id="terms">
+        @if (rsDel != null)
+        {
+            if (rsDel.DelCustomTerms.Length > 0)
+            {
+            <h2>@rsLoc.BusName</h2>
+            <p>@Html.Raw(WebConvert.PreserveBreaks(HttpUtility.HtmlEncode(rsDel.DelCustomTerms)))</p>
+            }
+        }
+        <p>@Html.Raw( Page.SitePage.Body )</p>
+	</div>
+    @RenderPage( "~/Shared/_Google.cshtml" )
+</body>
+</html>

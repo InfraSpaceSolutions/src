@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutredeemDialogParent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#00FFFFFF" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutRedeemDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corners"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutRedeemDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/redeemDialogCheckInLayout"
+            android:layout_alignRight="@+id/redeemDialogCheckInLayout"
+            android:background="#3B3B3B"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/redeemDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/dialog_check_in_redeem"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/redeemDialogName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayoutRedeemDialogTitle"
+            android:layout_alignRight="@+id/linearLayoutRedeemDialogTitle"
+            android:layout_below="@+id/linearLayoutRedeemDialogTitle"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:paddingBottom="5dp"
+            android:textColor="#3B3B3B"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/redeemDialogDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/redeemDialogCheckInLayout"
+            android:layout_alignRight="@id/redeemDialogCheckInLayout"
+            android:layout_below="@+id/redeemDialogAmount"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/dialog_member_description"
+            android:textColor="#3B3B3B" />
+
+        <RelativeLayout
+            android:id="@+id/redeemDialogCheckInLayout"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/redeemDialogDescription"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/buttonRedeemCheckIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/rounded_corners"
+                android:text="@string/dialog_check_in"
+                android:textColor="#333333" />
+
+            <Button
+                android:id="@+id/buttonRedeemRedeem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/rounded_corners"
+                android:text="@string/dialog_redeem"
+                android:textColor="#333333" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/redeemDialogAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/redeemDialogName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

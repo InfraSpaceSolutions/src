@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\SqlMetal.exe" /server:Ralph3 /database:%1 /user:sa /password:PASSWORDGOESHERE /provider:SQL2005 /views /sprocs /context:WebDBContext /code:"WebDBContext.cs"

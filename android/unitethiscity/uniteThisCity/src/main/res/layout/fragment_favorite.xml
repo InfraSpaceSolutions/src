@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutFavorite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/crumbFavorite"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/crumb_bar_fixed"
+        android:gravity="center"
+        android:paddingBottom="2dp"
+        android:text="@string/favorites"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:id="@+id/scrollViewFavorite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/crumbFavorite"
+        android:isScrollContainer="false" >
+
+       <LinearLayout
+            android:id="@+id/linearLayoutFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayoutFavoriteNone"
+        android:layout_alignTop="@+id/scrollViewFavorite"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewFavoritesNone"
+            android:src="@drawable/icon_favorites_none"
+            android:layout_above="@+id/favoriteNoFavorites"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/favorites_none"
+            android:id="@+id/favoriteNoFavorites"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:layout_above="@+id/favoriteNoFavoritesMessage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favorites_none_message"
+            android:id="@+id/favoriteNoFavoritesMessage"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

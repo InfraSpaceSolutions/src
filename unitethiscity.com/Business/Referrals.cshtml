@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Give Back");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    WebDBContext db = new WebDBContext();
+    
+    // build the webgrid for display
+    IEnumerable<VwReferrals> rs = (from rows in db.VwReferrals where rows.BusID == siteBusiness.BusID orderby rows.AccID descending select rows);
+    WebGrid webGrid = new WebGrid(rs, rowsPerPage: Convert.ToInt32(SiteSettings.GetValue("DefaultPageSize")));
+    
+    // get the message from the query string ( form submission message )
+    string msg = WebConvert.ToString(Request.QueryString["Msg"], "");
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Business/Dashboard" )">Business Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@HttpUtility.HtmlEncode(siteBusiness.BusName): @Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+
+            <!-- DASHBOARD -->
+
+            <!-- NOTIFICATION BOX -->
+            @if(msg == "Modify")
+            {
+                <div class="NotificationBox Green">
+                    <div class="NotificationMessage">Your business information has been updated</div>
+                    <div class="NotificationClose"></div>
+                </div>
+                <br />
+            }
+
+            <!-- BUSINESS BOX  -->
+            <!-- BUSINESS BOX  -->
+            <div class="dashboardBusinessBox">
+                <div class="dashboardBusinessImage"><img src="@siteBusinessInfo.ImageUrl(true)" width="100" height="100" alt="@siteBusiness.BusName" /></div>
+                <div style="float:left; width:640px;margin-right:0px;">
+                </div>
+            </div>
+            <br style="clear:left;" />
+            <h2>Referrals</h2>
+            <div id="WebGridPanel" class="WebGrid">
+                @webGrid.GetHtml(
+                    columns: webGrid.Columns(
+                    webGrid.Column("AccFName", "Account",  format: @<text>@SiteBusiness.FormatMemberName(item.AccFName, item.AccLName)</text>, style:"wgWidth20 wgLeft"),
+                    webGrid.Column("RfcCode", "Code", format: @<text>@(item.RfcCode)</text>, style:"wgWidth25 wgCenter"),
+                    webGrid.Column("AccEnabled", "Active", format: @<text>@(item.AccEnabled ? "Yes" : "No" )</text>, style:"wgWidth10 wgCenter"),
+                    webGrid.Column("BusName", "Business", format: @<text>@HttpUtility.HtmlEncode(item.BusName)</text>, style:"wgWidth55 wgLeft")
+                ),
+                    tableStyle: "WebGridTable",
+                    headerStyle: "WebGridHeader",
+                    rowStyle: "WebGridRow",
+                    alternatingRowStyle: "WebGridRowAlt",
+                    footerStyle: "WebGridFooter",
+                    mode: WebGridPagerModes.All,
+                    firstText: "First Page",
+                    lastText: "Last Page",
+                    numericLinksCount: 10,
+                    emptyRowCellValue: "N/A"
+                )
+            </div>
+            @if (webGrid.TotalRowCount == 0)
+            {
+                <div style="text-align:center;padding:5px;">No matching results.</div>
+            } 
+		</div>
+		<br style="clear:left;" />
+	</div>

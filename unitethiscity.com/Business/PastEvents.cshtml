@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Past Events");
+
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    WebDBContext db = new WebDBContext();
+    
+    // get the past specials and events
+    IEnumerable<VwEvents> rsEvt = db.VwEvents.Where(target => target.BusID == siteBusiness.BusID && target.EvtEndDate < DateTime.Today).OrderBy(target => target.EvtStartDate);
+
+    // build the webgrid for display of the events
+    WebGrid evtGrid = new WebGrid(rsEvt, fieldNamePrefix: "evt");
+
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Business/Dashboard" )">Business Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@HttpUtility.HtmlEncode(siteBusiness.BusName)</h1>
+            @Html.Raw( Page.SitePage.Body )
+
+            <!-- DASHBOARD -->
+            <!-- SPECIALS AND EVENTS  -->
+            <h2>Past Specials and Events</h2>
+            <div id="EventGridPanel" class="WebGrid">
+            @if( rsEvt.Any() )
+            {
+                @evtGrid.GetHtml(
+                    columns: evtGrid.Columns(
+                    evtGrid.Column("EvtStartDate", "When",  format: @<a href="@Href( "~/Business/Events/" + item.EvtID )" title="Edit Event">@SiteEvent.EventDateToString(item.EvtStartDate, item.EvtEndDate)</a>, style:"wgWidth20 wgCenter"),
+                    evtGrid.Column("EttName", "Type",  format: @<a href="@Href( "~/Business/Events/" + item.EvtID )" title="Edit Event">@item.EttName</a>, style:"wgWidth15 wgCenter"),
+                    evtGrid.Column("EvtSummary", "Summary",  format: @<a href="@Href( "~/Business/Events/" + item.EvtID )" title="Edit Event">@item.EvtSummary</a>, style:"wgWidth65 wgLeft")
+                ),
+                    tableStyle: "WebGridTable",
+                    headerStyle: "WebGridHeader",
+                    rowStyle: "WebGridRow",
+                    alternatingRowStyle: "WebGridRowAlt",
+                    footerStyle: "WebGridFooter",
+                    emptyRowCellValue: "N/A"
+                )
+            }
+            else
+            {
+                <p>There are currently no past specials or events.</p>
+            }
+            </div>
+		</div>
+		<br style="clear:left;" />
+	</div>

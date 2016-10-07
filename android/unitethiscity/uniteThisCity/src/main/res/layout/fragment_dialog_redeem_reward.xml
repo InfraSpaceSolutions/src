@@ -1,0 +1,343 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutRedeemRewardDialogParent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#00FFFFFF" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutRedeemRewardDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corners"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_width="265dp"
+            android:layout_height="wrap_content"
+            android:background="#3B3B3B"
+            android:orientation="vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="55dp"
+            android:paddingRight="55dp"
+            android:paddingTop="15dp" >
+
+            <TextView
+                android:id="@+id/redeemRewardDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/dialog_redeem_reward"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/redeemRewardBusinessName"
+            android:textColor="#3B3B3B"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_below="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_marginTop="20dp"
+            android:layout_alignLeft="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignStart="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignRight="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignEnd="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:gravity="center_horizontal" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutRedeemRewardDialogBody"
+            android:layout_below="@+id/redeemRewardBusinessName"
+            android:layout_marginBottom="10dp"
+            android:layout_alignRight="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignEnd="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignStart="@id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignLeft="@id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/redeemRewardSavingsRedeemed"
+                android:textColor="#3B3B3B"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="@string/dialog_redeem_reward_savings_redeemed"
+                android:visibility="gone"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/redeemRewardDealAmount"
+                android:textStyle="bold"
+                android:textColor="#3B3B3B"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:textSize="32sp"
+                android:textIsSelectable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/redeemRewardDescription"
+                android:layout_marginBottom="20dp"
+                android:textColor="#3B3B3B"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:maxLines="3"
+                android:ellipsize="end" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#3B3B3B"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:text="@string/dialog_redeem_reward_thanks_local"
+                android:id="@+id/redeemRewardThanksLocal"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_redeem_reward_share"
+                android:id="@+id/redeemRewardShare"
+                android:layout_marginBottom="15dp"
+                android:textColor="#3B3B3B"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutRedeemRewardShareTwitter"
+                android:gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageViewRedeemRewardShareTwitter"
+                    android:src="@drawable/icon_btn_twitter" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="@string/dialog_redeem_reward_share_twitter"
+                    android:id="@+id/btnRedeemRewardShareTwitter"
+                    android:background="@drawable/btn_share_twitter"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutRedeemRewardShareFacebook"
+                android:gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageViewRedeemRewardShareFacebook"
+                    android:src="@drawable/icon_btn_facebook" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="@string/dialog_redeem_reward_share_facebook"
+                    android:id="@+id/btnRedeemRewardShareFacebook"
+                    android:background="@drawable/btn_share_facebook"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutRedeemRewardShareInstagram"
+                android:gravity="center"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageViewRedeemRewardShareInstgram"
+                    android:src="@drawable/icon_btn_instagram" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="@string/dialog_redeem_reward_share_instagram"
+                    android:id="@+id/btnRedeemRewardShareInstagram"
+                    android:background="@drawable/btn_share_instagram"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:id="@+id/imageViewRedeemRewardUTCLogo"
+                android:src="@drawable/header_logo"
+                android:layout_marginTop="25dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutRedeemRewardDialogBodyNotRedeemed"
+            android:layout_below="@+id/redeemRewardBusinessName"
+            android:layout_marginBottom="10dp"
+            android:layout_alignRight="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignEnd="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignStart="@id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignLeft="@id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/redeemRewardSavingsNotRedeemed"
+                android:textColor="#3B3B3B"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:text="@string/dialog_redeem_reward_savings_not_redeemed"
+                android:visibility="visible"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViewRedeemRewardNack"
+                android:src="@drawable/nack"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/redeemRewardErrorMessage"
+                android:textColor="#3B3B3B"
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="@string/dialog_redeem_reward_retry"
+                android:id="@+id/buttonRedeemRewardRetry"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/btn_sign_up_email"
+                android:textColor="#3B3B3B"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:id="@+id/imageViewNotRedeemedUTCLogo"
+                android:src="@drawable/header_logo"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutRedeemRewardDialogSetting"
+            android:layout_below="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_marginBottom="10dp"
+            android:layout_alignRight="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignEnd="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignStart="@id/linearLayoutRedeemRewardDialogTitle"
+            android:layout_alignLeft="@+id/linearLayoutRedeemRewardDialogTitle"
+            android:background="#FFFFFF"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_redeem_reward_default_social"
+                android:id="@+id/redeemRewardDefaultSocial"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dp"
+                android:textColor="#3B3B3B"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="@string/dialog_redeem_reward_default_social_yes"
+                android:id="@+id/btnRedeemRewardDefaultSocialYes"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_sign_up_email"
+                android:textColor="#3B3B3B"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:text="@string/dialog_redeem_reward_default_social_no"
+                android:id="@+id/btnRedeemRewardDefaultSocialNo"
+                android:background="@drawable/btn_sign_up_email"
+                android:textColor="#3B3B3B"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:id="@+id/imageViewRedeemRewardSettingUTCLogo"
+                android:src="@drawable/header_logo"
+                android:layout_marginTop="25dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

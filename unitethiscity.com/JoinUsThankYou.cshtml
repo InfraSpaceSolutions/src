@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+    
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage(PageContext.Page.VirtualPath);
+
+    // this page needs SSL if it is available (we're in production)
+    if (SSL.UnforceSSL())
+    {
+        return;
+    }
+
+    RegisterMember fh = (RegisterMember)Session["objRegisterMember"];
+    if (fh == null)
+    {
+        Response.Redirect( Href( "~/JoinUs" ), false );
+        return;
+    }
+    else
+    {
+        Session.Remove("objRegisterMember");
+    }
+}
+	<!-- PAGE -->
+	<div id="page">
+		<div id="leftSide">
+			<h1>Join Us</h1>
+			<h2>@Html.Raw( Page.SitePage.Heading )</h2>
+            @Html.Raw( Page.SitePage.Body )
+		</div>
+		@RenderPage( "~/Shared/_RightColumn.cshtml" )
+		<br style="clear:left;" />
+	</div>
+

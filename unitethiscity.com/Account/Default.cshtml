@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage();
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    Response.Redirect(Href("~/Account/Dashboard"), false);
+    return;
+}

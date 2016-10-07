@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SignupActivity"
+    android:background="#ffffff">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/imageViewSignupLogo"
+        android:src="@drawable/header_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageViewSignupBackground"
+        android:src="@drawable/background_new"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
+        android:layout_marginTop="175dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewSignupUTC"
+        android:src="@drawable/home_logo_large"
+        android:layout_alignTop="@+id/imageViewSignupBackground"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-75dp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:text="@string/button_signup_email"
+        android:id="@+id/buttonSignupEmail"
+        android:layout_below="@+id/imageViewSignupUTC"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_sign_up_email"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:text="@string/button_signup_facebook"
+        android:id="@+id/buttonSignupFacebook"
+        android:layout_below="@+id/buttonSignupEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:background="@drawable/btn_sign_up_facebook"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/signup_already_joined"
+        android:id="@+id/textViewSignupAlreadyJoined"
+        android:layout_above="@+id/textViewSignupSkip"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/signup_skip"
+        android:id="@+id/textViewSignupSkip"
+        android:layout_above="@+id/textViewSignupNote1"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/signup_note_1"
+        android:id="@+id/textViewSignupNote1"
+        android:layout_above="@+id/textViewSignupNote2"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/signup_note_2"
+        android:id="@+id/textViewSignupNote2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

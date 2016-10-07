@@ -1,0 +1,37 @@
+﻿@using System.Configuration;
+@{
+    // use a common layout page across all site pages in this folder
+    Layout = "~/Shared/_Layout.cshtml";
+    
+    // open the database and load it in the page object
+    WebDBContext db = new WebDBContext( );
+    Page.Database = db;
+
+    // load the site navigation to a list that is accessible on all pages/components
+    List<VwNavigation> navList = db.VwNavigation.ToList( );
+    Page.NavList = navList;
+
+
+    // Debug setting
+    bool isDebug = WebConvert.ToBoolean( ConfigurationManager.AppSettings["IS_DEBUG"], false );
+    if ( isDebug )
+    {
+        RunPage( );
+        // Friendly errors turned OFF in debug
+        return;
+    }
+
+    // attempt to run the requested page; catch and handle errors by forwarding to the error page
+    try
+    {
+        RunPage( );
+    }
+    catch( Sancsoft.Web.WebException wex )
+    {
+        Response.Redirect( Href( "~/Error.cshtml?rc=" + (int)wex.ReturnCode + "&source=" + HttpUtility.UrlEncode( Request.AppRelativeCurrentExecutionFilePath ) ) );
+    }
+    catch( Exception ex )
+    {
+        Response.Redirect( Href( "~/Error.cshtml?rc=1&source=" + HttpUtility.UrlEncode( ex.Message ) ) );
+    }
+}

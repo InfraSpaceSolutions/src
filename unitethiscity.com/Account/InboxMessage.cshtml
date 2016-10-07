@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Inbox");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteAccount siteAccount = new SiteAccount();
+
+    // identify the inbox message
+    int inbID = WebConvert.ToInt32(UrlData[0], 0);
+
+    WebDBContext db = new WebDBContext();
+
+    // get the message and make sure that we have access
+    VwInboxMessages rs = db.VwInboxMessages.Single(target => target.InbID == inbID && target.InbToAccID == siteAccount.AccID);
+
+    // mark the inbox message as read if it hasn't been marked as read so far
+    TblInboxMessages rsInb = db.TblInboxMessages.SingleOrDefault(target => target.InbID == inbID && target.InbRead == false);
+    if ( rsInb != null )
+    {
+        rsInb.InbRead = true;
+        db.SubmitChanges();
+    }
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+    		<div class="breadcrumbSpacerGrayGray">&nbsp;</div>
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/Inbox/")">Inbox</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@siteAccount.AccFName @siteAccount.AccLName: @Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+            <h2>@rs.MsgSummary</h2>
+            <hr />
+            <div style="min-height:250px;">
+                <div>@Html.Raw(WebConvert.PreserveBreaks(rs.MsgBody))</div>
+                <div style="text-align:right;font-style:italic;">- @rs.MsgFromName</div>
+                <div style="text-align:right;">@rs.MsgTS.ToShortDateString() - @rs.MsgTS.ToShortTimeString()</div>
+            </div>
+    		<br style="clear:left;" />
+            <div style="text-align:right;margin-bottom:10px;">
+                <div class="orangeButton" style="margin-right:10px;"><a href="@Href("~/Account/InboxMessageDelete/" + inbID)" class="button">Delete</a></div>
+                <div class="orangeButton" style="margin-right:10px;"><a href="@Href("~/Account/Inbox")" class="button">Inbox</a></div>
+                <div class="orangeButton" style="margin-right:10px;"><a href="@Href("~/Account/InboxMessagePrevious/" + inbID)" class="button">Previous</a></div>
+                <div class="orangeButton" style="margin-right:10px;"><a href="@Href("~/Account/InboxMessageNext/" + inbID)" class="button">Next</a></div>
+            </div>
+		</div>
+	</div>

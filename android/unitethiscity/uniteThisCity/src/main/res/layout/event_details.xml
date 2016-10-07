@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutEventeDetails"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="#bdbdbd"
+        android:id="@+id/relativeLayoutEventDetailsContainer"
+        android:paddingLeft="15dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp">
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/imageViewEventDetails"
+            android:src="@drawable/location_empty"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/linaerLayoutEventDetailsSpacer"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutEventDetails"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:orientation="vertical"
+            android:layout_alignBottom="@+id/linaerLayoutEventDetailsSpacer"
+            android:layout_toEndOf="@+id/imageViewEventDetails"
+            android:layout_alignTop="@+id/linaerLayoutEventDetailsSpacer"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="65dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutEventDetailsName"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="2dp">
+
+                <TextView
+                    android:id="@+id/eventDetailsFrom"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:lines="1"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutEventDetailsSummary"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="#bdbdbd" >
+
+                <TextView
+                    android:id="@+id/eventDetailsSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="5dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:background="#263238" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/linearLayoutEventDetailsDateReadMore"
+            android:layout_marginTop="15dp"
+            android:background="#263238"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="false"
+            android:layout_below="@+id/linearLayoutEventDetails">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eventDetailsDate"
+                android:background="#757575"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonEventDetailsReadMore"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="#fb8c00"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="#263238"
+                android:text="@string/event_details_read_more" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Favorites");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteMember siteMember = new SiteMember();
+
+    List<SummaryStats> stats = siteMember.CalculateSummaryStats();
+    SummaryStats stat = stats.Single(target => target.Name == Page.SitePage.Name);
+
+    WebDBContext db = new WebDBContext();
+    
+    // build the webgrid for display
+    IEnumerable<VwFavorites> rs = (from rows in db.VwFavorites where rows.AccID == siteMember.AccID orderby rows.FavTS descending select rows);
+    WebGrid webGrid = new WebGrid(rs, rowsPerPage: Convert.ToInt32(SiteSettings.GetValue("DefaultPageSize")));    
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@siteMember.AccFName @siteMember.AccLName: @Html.Raw( Page.SitePage.Heading )</h1>
+            @Html.Raw( Page.SitePage.Body )
+
+            <!-- DASHBOARD -->
+
+            <!-- BUSINESS BOX  -->
+            <div class="dashboardBusinessBox">
+                <div class="dashboardBusinessImage"><img src="@SiteAccount.ActiveAvatarURL()" width="100" height="100" alt="" /></div>
+                <div style="float:left; width:640px;margin-right:0px;">
+                    <div style="text-align:center;">
+                        <div style="background-color:white;margin-top:0px; padding:10px; border-radius:10px;height:80px;">
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">Today</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.Today</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">Past Week</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.PastWeek</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">This Month</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.ThisPeriod</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">Last Month</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.LastPeriod</div>
+                            </div>
+                            <div style="float:left;width:20%;margin-top:20px;margin-bottom:5px;">
+                                <div style="font-size:14px;font-weight:bold;">All-Time</div>
+                                <div style="font-size:24px;font-weight:bold;">@stat.AllTime</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br style="clear:left;" />
+            @RenderPage( "~/Shared/_MemberTabs.cshtml" )
+            <h2>Favorites</h2>
+            <div id="WebGridPanel" class="WebGrid">
+                @webGrid.GetHtml(
+                    columns: webGrid.Columns(
+                    webGrid.Column("LocName", "Business", format: @<a href="@Href("~/Directory/Business/"+ @item.LocID)">@(item.LocName)</a>, style:"wgWidth75 wgLeft"),
+                    webGrid.Column("FavTS", "Timestamp", format: @<text>@(item.FavTS.ToShortDateString()) - @(item.FavTS.ToShortTimeString())</text>, style:"wgWidth25 wgCenter")
+                ),
+                    tableStyle: "WebGridTable",
+                    headerStyle: "WebGridHeader",
+                    rowStyle: "WebGridRow",
+                    alternatingRowStyle: "WebGridRowAlt",
+                    footerStyle: "WebGridFooter",
+                    mode: WebGridPagerModes.All,
+                    firstText: "First Page",
+                    lastText: "Last Page",
+                    numericLinksCount: 10,
+                    emptyRowCellValue: "N/A"
+                )
+            </div>
+		</div>
+		<br style="clear:left;" />
+	</div>

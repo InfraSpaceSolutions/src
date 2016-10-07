@@ -1,0 +1,169 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("Modify");
+
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+    
+    WebDBContext db = new WebDBContext();
+    
+    // get the categories for the category dropdown list
+    List<VwCategories> rsCat = db.VwCategories.Where(target => target.CatParentID != 0).OrderBy( target => target.CatParentName ).ThenBy( target => target.CatName ).ToList();
+    
+    // get the businesses defined deals for the deal dropdown list
+    List<TblDealDefinitions> rsDld = db.TblDealDefinitions.Where(target => target.BusID == siteBusiness.BusID).OrderBy( target => target.DldName ).ToList();
+    int count = 0;
+
+    if (IsPost)
+    {
+        siteBusiness.BusName = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtBusName"], ""), 50);
+        siteBusiness.BusFormalName = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtBusFormalName"], ""), 128);
+        siteBusiness.BusFacebookLink = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtBusFacebookLink"], ""), 255);
+        siteBusiness.BusWebsite = WebConvert.Truncate(WebConvert.ToString(Request.Form["txtBusWebsite"], ""), 255);
+        siteBusiness.CatID = WebConvert.ToInt32(Request.Form["selCatID"], 0);
+        siteBusiness.BusAssignedDldID = WebConvert.ToInt32(Request.Form["selDldID"], 0);
+        siteBusiness.BusRequirePin = WebConvert.ToBoolean( Request.Form["selBusRequirePin"], false );
+        siteBusiness.BusFacebookID = WebConvert.Truncate(WebConvert.ToString(Request["txtBusFacebookID"], ""), 50);
+        siteBusiness.SaveChanges();
+
+        // redirect to the dashboard
+        Response.Redirect(Href("~/Business/Dashboard?Msg=Modify"), false);
+        return;
+    }
+}
+@section head
+{
+	<script src="@Href( "~/Scripts/jquery.validate.min.js" )" type="text/javascript"></script>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        $("#frm").validate(
+			{
+			    messages:
+				{
+				    txtBusName: { required: "required" },
+				    txtBusFormalName: { required: "required" },
+				    selCatID: { required: "required" },
+				    selDldID: { required: "required" },
+				    selBusRequirePin: { required: "required" }
+				}
+			});
+	    });
+	</script>
+    <script type="text/javascript">
+        function LookupFacebookProfileID() {
+            var name = $('#txtBusFacebookID')[0].value;
+            $.getJSON('https://graph.facebook.com/' + name) 
+                .done(function (data) {
+                    $('#txtBusFacebookID')[0].value = data.id;
+                })
+                .fail(function (jqxhr, textStatus, error) {
+                    alert('Facebook Profile ID not found');
+                });
+        }
+    </script>
+}
+	<!-- PAGE -->
+	<div id="page">
+        <!-- BREAD CRUMBS -->
+        <div class="breadcrumbs Roles">
+            <div class="breadcrumbGray"><a href="@Href( "~/Account/" )">Account Dashboard</a></div>
+			<div class="breadcrumbEndGray">&nbsp;</div>
+        </div>
+		<div id="fullSide">
+			<h1>@siteBusiness.BusName: @Html.Raw(Page.SitePage.Heading)</h1>
+            @Html.Raw(Page.SitePage.Body)
+            <form name="frm" id="frm" method="post" class="basicForm">
+                <fieldset style="width:484px;">
+                    <div>
+                        <label for="selCatID">Category: *</label><br />
+                        <select name="selCatID" class="required" style="width:212px;">
+                            <option value="">Select...</option>
+                        @foreach( var row in rsCat )
+                        {
+                            <option value="@row.CatID" @( (row.CatID == siteBusiness.CatID ) ? " selected" : "" )>@(row.CatParentName): @(row.CatName)</option>
+                        }
+                        </select>
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtBusName">Business Name: *</label><br />
+                        <input type="text" name="txtBusName" class="required" size="20" maxlength="50" value="@siteBusiness.BusName" />
+                    </div>
+                    <div>
+                        <label for="txtBusFormalName">Business Formal Name: *</label><br />
+                        <input type="text" name="txtBusFormalName" class="required" size="20" maxlength="128" value="@siteBusiness.BusFormalName" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtBusWebsite">Website:</label><br />
+                        <input type="text" name="txtBusWebsite" size="20" maxlength="255" style="width:432px;" value="@siteBusiness.BusWebsite" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtBusFacebookLink">Facebook URL:</label><br />
+                        <input type="text" name="txtBusFacebookLink" size="20" maxlength="255" style="width:432px;" value="@siteBusiness.BusFacebookLink" />
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="txtBusFacebookLink">Facebook Profile ID:</label><br />
+                        <input type="text" name="txtBusFacebookID" id="txtBusFacebookID" size="20" maxlength="50" style="width:432px;" value="@siteBusiness.BusFacebookID" />
+                        <br />
+                        <span>Mobile Apps connect to your Facebook page using the Facebook Profile ID number (ex. 144742395586917).  To look up your Profile ID, enter your profile name
+                            and click <a href="#" onclick="javascript:LookupFacebookProfileID();return false;">Lookup Profile ID</a>
+                        </span>
+                        
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div>
+                        <label for="selDldID">Assigned Deal: *</label><br />
+                        <select name="selDldID" class="required" style="width:212px;">
+                            <option value="">Select...</option>
+                        @foreach( var row in rsDld )
+                        {
+                            if( count == 0 )
+                            {
+                                <option value="0" @( ( siteBusiness.BusAssignedDldID == 0 ) ? " selected" : "" )>No Deal</option>
+                            }
+                            <option value="@row.DldID" @( (row.DldID == siteBusiness.BusAssignedDldID ) ? " selected" : "" )>@row.DldName</option>
+                            count++;
+                        }
+                        </select>
+                    </div>
+                    <div>
+                        <label for="selBusRequirePin">Require Pin: *</label><br />
+                        <select name="selBusRequirePin" class="required" style="width:212px;">
+                            <option value="">Select...</option>
+                            <option value="False"@(( !siteBusiness.BusRequirePin ) ? " selected" : "" )>No</option>
+                            <option value="True"@(( siteBusiness.BusRequirePin ) ? " selected" : "" )>Yes</option>
+                        </select>
+                    </div>
+                    <br style="clear:left;" />
+                    <br />
+                    <div style="float:none; margin-right:20px;">
+                        <div class="orangeArrowButtonRight">
+                            <input type="submit" name="_btnSubmit" value="Submit" class="button" />
+                        </div>
+                        <div class="orangeButtonRight">
+                            <input type="button" name="_btnCancel" value="Cancel" class="button" onclick="javascript: window.location = '/Business/Dashboard';" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+		</div>
+		<br style="clear:left;" />
+	</div>

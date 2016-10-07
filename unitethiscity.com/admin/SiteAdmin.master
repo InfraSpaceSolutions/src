@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SiteAdmin.master.cs" Inherits="admin_SiteAdmin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>UniteThisCity.com Administration</title>
+	<link href="admin.css" rel="Stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="formAdmin" runat="server">
+	<asp:ScriptManager ID="WebsiteScriptManager" runat="server"></asp:ScriptManager>
+    <div id="page">
+		<div id="pageHeader">
+			<div id="pageHeaderInfo">
+				<div id="pageHeaderText">Administration Website</div>
+				<asp:Panel ID="PageHeaderLoginPanel" CssClass="pageHeaderLogin" runat="server">
+					<div>Account: <asp:Literal ID="AccEMailLiteral" runat="server" /></div>
+					<div><a href="Logout.aspx">Logout</a></div>
+				</asp:Panel>
+			</div>
+			<div id="pageHeaderLogo">
+				<a href="Default.aspx"><img src="images/AdminLogo.png" width="380" height="100" alt="unitethiscity.com" /></a>
+			</div>
+		</div>
+		
+		<div id="navMain">
+			<asp:ContentPlaceHolder ID="NavPlaceHolder" runat="server" />
+		</div>
+
+		<div id="mainContent">
+			<asp:ContentPlaceHolder id="BodyPlaceHolder" runat="server">
+			</asp:ContentPlaceHolder>
+		</div>
+
+		<div id="pageFooter">
+			Copyright &copy;<%= DateTime.Now.Year.ToString( ) %> Unite This City. Unauthorized access is prohibited.
+		</div>
+    </div>
+    </form>
+</body>
+</html>

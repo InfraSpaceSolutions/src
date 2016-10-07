@@ -1,0 +1,9 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage(PageContext.Page.VirtualPath);
+    
+    Response.Redirect( Href( "~/JoinUs" ), false );
+    return;
+}

@@ -1,0 +1,218 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutLoyaltyDialogParent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#00FFFFFF" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutLoyaltyDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corners"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLoyaltyDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#3B3B3B"
+            android:orientation="vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            android:paddingTop="15dp" >
+
+            <TextView
+                android:id="@+id/loyaltyDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/dialog_loyalty"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_below="@+id/linearLayoutLoyaltyDialogTitle"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignRight="@+id/linearLayoutLoyaltyDialogTitle"
+            android:layout_alignEnd="@+id/linearLayoutLoyaltyDialogTitle"
+            android:layout_alignStart="@id/linearLayoutLoyaltyDialogTitle"
+            android:layout_alignLeft="@id/linearLayoutLoyaltyDialogTitle"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loyaltyBusinessName"
+                android:textColor="#3B3B3B"
+                android:text="@string/dialog_loyalty_business"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/loyaltyCongrats"
+                android:textStyle="bold"
+                android:textColor="#3B3B3B"
+                android:text="@string/dialog_loyalty_congrats"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_loyalty_earned_point"
+                android:id="@+id/loyaltyEarnPoint"
+                android:layout_marginBottom="20dp"
+                android:textColor="#3B3B3B"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_loyalty_share_local"
+                android:id="@+id/loyaltyShareLocal"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#3B3B3B"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_loyalty_support"
+                android:id="@+id/loyaltySupportBusiness"
+                android:layout_marginBottom="15dp"
+                android:textColor="#3B3B3B"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutLoyaltyShareTwitter"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageViewLoyaltyShareTwitter"
+                    android:src="@drawable/icon_btn_twitter" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="@string/dialog_loyalty_share_twitter"
+                    android:id="@+id/btnLoyaltyShareTwitter"
+                    android:background="@drawable/btn_share_twitter"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutLoyaltyShareFacebook"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageViewLoyaltyShareFacebook"
+                    android:src="@drawable/icon_btn_facebook" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="@string/dialog_loyalty_share_facebook"
+                    android:id="@+id/btnLoyaltyShareFacebook"
+                    android:background="@drawable/btn_share_facebook"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearLayoutLoyaltyShareInstagram"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/imageViewLoyaltyShareInstgram"
+                    android:src="@drawable/icon_btn_instagram" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:text="@string/dialog_loyalty_share_instagram"
+                    android:id="@+id/btnLoyaltyShareInstagram"
+                    android:background="@drawable/btn_share_instagram"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loyaltyErrorMessage"
+            android:layout_alignLeft="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_alignStart="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_alignRight="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_alignEnd="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="#3B3B3B"
+            android:textSize="20dp"
+            android:textIsSelectable="true"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:id="@+id/imageViewLoyaltyUTCLogo"
+            android:src="@drawable/header_logo"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_alignRight="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_alignEnd="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_alignLeft="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_alignStart="@+id/linearLayoutLoyaltyDialogBody"
+            android:layout_marginBottom="10dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

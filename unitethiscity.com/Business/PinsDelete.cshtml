@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Shared/_Layout.cshtml";
+
+    // create an unmanaged page
+    Page.SitePage = new SiteWebPage();
+    Page.SitePage.ApplyName("PIN: Delete");
+    
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int pinID = WebConvert.ToInt32(UrlData[0], 0);
+
+    SiteBusiness siteBusiness = new SiteBusiness();
+
+    SiteBusinessInfo siteBusinessInfo = new SiteBusinessInfo(siteBusiness.BusID);
+
+    WebDBContext db = new WebDBContext(); 
+
+    // get the pin to delete
+    TblPins rsPin = db.TblPins.SingleOrDefault(target => target.PinID == pinID);
+    
+    // Delete the record
+    db.TblPins.DeleteOnSubmit(rsPin);
+    db.SubmitChanges();
+
+    // redirect to the dashboard
+    Response.Redirect(Href("~/Business/Dashboard?msg=Modify"), false);
+    return;
+}

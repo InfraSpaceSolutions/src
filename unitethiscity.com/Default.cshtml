@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Shared/_LayoutHome.cshtml";
+
+    // identify the page and load the navigation info into the page
+    Page.SitePage = new SiteWebPage(PageContext.Page.VirtualPath);
+}
+	<!-- PAGE -->
+	<div id="pageHome">
+        @Html.Raw( Page.SitePage.Body )
+	</div>

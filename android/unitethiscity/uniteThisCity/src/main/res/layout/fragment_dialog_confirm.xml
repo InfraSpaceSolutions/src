@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayoutDialogConfirmParent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#00FFFFFF" >
+	
+	<RelativeLayout
+	    android:id="@+id/relativeLayoutDialogConfirm"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true"
+	    android:layout_gravity="center"
+	    android:background="@drawable/rounded_corners"
+	    android:paddingBottom="25dp" >
+
+	    <LinearLayout
+	        android:id="@+id/linearLayoutHeaderConfirm"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="5dp"
+	        android:layout_marginTop="10dp"
+	        android:background="#3B3B3B"
+	        android:orientation="vertical"
+	        android:paddingBottom="10dp"
+	        android:paddingLeft="20dp"
+	        android:paddingRight="20dp"
+	        android:paddingTop="10dp" >
+
+	        <TextView
+	            android:id="@+id/textViewHeaderConfirm"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:gravity="center"
+	            android:minWidth="150dp"
+	            android:text="@string/dialog_redeem"
+	            android:textColor="@android:color/white"
+	            android:textSize="20sp"
+	            android:textStyle="bold" />
+	    </LinearLayout>
+
+	    <TextView
+	        android:id="@+id/textViewSuccessStateConfirm"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderConfirm"
+	        android:layout_alignRight="@id/linearLayoutHeaderConfirm"
+	        android:layout_below="@+id/textViewConfirmBusinessName"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="30dp"
+	        android:layout_marginTop="20dp"
+	        android:gravity="center"
+	        android:text="@string/dialog_unsuccessful"
+	        android:textColor="@android:color/black"
+	        android:textSize="16sp"
+	        android:textStyle="bold"
+	        android:visibility="gone" />
+
+	    <TextView
+	        android:id="@+id/textViewDescriptionConfirm"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderConfirm"
+	        android:layout_alignRight="@id/linearLayoutHeaderConfirm"
+	        android:layout_below="@id/textViewConfirmBusinessName"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="15dp"
+	        android:gravity="center"
+	        android:text="@string/dialog_successful_check_in"
+	        android:textColor="@android:color/black"
+	        android:textSize="12sp"
+	        android:visibility="invisible" />
+
+	    <ImageView
+	        android:id="@+id/imageViewPostFacebook"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignRight="@id/linearLayoutHeaderConfirm"
+	        android:layout_below="@+id/textViewShareLocal"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="2dp"
+	        android:layout_marginRight="30dp"
+	        android:layout_marginTop="20dp"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/icon_facebook_new" />
+
+	    <ImageView
+	        android:id="@+id/imageViewPostTwitter"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderConfirm"
+	        android:layout_below="@id/textViewShareLocal"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="2dp"
+	        android:layout_marginLeft="30dp"
+	        android:layout_marginTop="20dp"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/icon_twitter_new" />
+
+	    <TextView
+	        android:id="@+id/textViewConfirmBusinessName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderConfirm"
+	        android:layout_alignRight="@id/linearLayoutHeaderConfirm"
+	        android:layout_below="@id/linearLayoutHeaderConfirm"
+	        android:layout_marginTop="5dp"
+	        android:gravity="center"
+	        android:textColor="@android:color/black"
+	        android:textSize="14sp"
+	        android:textStyle="bold" />
+
+	    <TextView
+	        android:id="@+id/textViewShareLocal"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/linearLayoutHeaderConfirm"
+	        android:layout_alignRight="@+id/linearLayoutHeaderConfirm"
+	        android:layout_below="@id/textViewDescriptionConfirm"
+	        android:layout_marginTop="15dp"
+	        android:gravity="center"
+	        android:text="@string/dialog_successful_share_local"
+	        android:textColor="@android:color/black"
+	        android:textSize="12sp" />
+
+	    <TextView
+	        android:id="@+id/textViewSavingsRedeemed"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderConfirm"
+	        android:layout_alignRight="@id/linearLayoutHeaderConfirm"
+	        android:layout_below="@+id/textViewConfirmBusinessName"
+	        android:layout_marginTop="15dp"
+	        android:gravity="center"
+	        android:text="@string/dialog_successful_savings_redeemed"
+	        android:textColor="@android:color/black"
+	        android:textSize="12sp" />
+
+	    <TextView
+	        android:id="@+id/textViewSavingsAmount"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@id/linearLayoutHeaderConfirm"
+	        android:layout_alignRight="@id/linearLayoutHeaderConfirm"
+	        android:layout_below="@id/textViewSavingsRedeemed"
+	        android:layout_marginTop="5dp"
+	        android:gravity="center"
+	        android:text="$"
+	        android:textColor="@android:color/black"
+	        android:textSize="18sp"
+	        android:textStyle="bold" />
+
+	    <ImageView
+	        android:id="@+id/imageViewPostTwitterShare"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/imageViewPostTwitter"
+	        android:layout_alignRight="@+id/imageViewPostTwitter"
+	        android:layout_below="@+id/imageViewPostTwitter"
+	        android:layout_marginBottom="20dp"
+	        android:adjustViewBounds="true"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/icon_twitter_share" />
+
+	    <ImageView
+	        android:id="@+id/imageViewConfirmLogo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="30dp"
+	        android:layout_alignLeft="@+id/linearLayoutHeaderConfirm"
+	        android:layout_alignRight="@+id/linearLayoutHeaderConfirm"
+	        android:layout_below="@+id/imageViewPostTwitterShare"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/header_logo" />
+
+	    <ImageView
+	        android:id="@+id/imageViewPostFacebookShare"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/imageViewPostFacebook"
+	        android:layout_alignRight="@+id/imageViewPostFacebook"
+	        android:layout_below="@+id/imageViewPostFacebook"
+	        android:adjustViewBounds="true"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/icon_facebook_share" />
+
+	    <ImageView
+	        android:id="@+id/imageViewNack"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_above="@+id/textViewShareLocal"
+	        android:layout_below="@+id/textViewSavingsRedeemed"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="5dp"
+	        android:scaleType="fitCenter"
+	        android:src="@drawable/nack"
+	        android:visibility="invisible" />
+
+	</RelativeLayout>
+
+</RelativeLayout>

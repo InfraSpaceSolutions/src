@@ -1,0 +1,27 @@
+﻿@{
+    // remove any layout that has been applied - specifically by page start
+    Layout = null;
+
+    // make sure the user is logged in
+    if ( !SiteAccount.IsLoggedIn() )
+    {
+        Response.Redirect(Href("~/AccountLogin"), false);
+        return;
+    }
+
+    int busID = WebConvert.ToInt32(UrlData[0], 0);
+    
+    // confirm that the user has acccess
+    SiteAccount siteAccount = new SiteAccount();
+    WebDBContext db  = new WebDBContext();
+    // allow access to administrators and to roles assigned to this business explicitly
+    if ( (db.TblAccountRoles.Count(target=>target.AccID == siteAccount.AccID && target.BusID == busID) == 0) && (!siteAccount.IsAdministrator()))
+    {
+        throw new Sancsoft.Web.WebException(Sancsoft.Web.RC.AccessDenied);
+    }
+
+    HttpContext.Current.Session["BUSINESS_ID"] = busID.ToString();
+    
+    Response.Redirect(Href("~/Business/Dashboard"), false);
+    return;
+}
