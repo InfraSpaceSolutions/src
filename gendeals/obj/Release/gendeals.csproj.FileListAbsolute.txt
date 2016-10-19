@@ -1,6 +1,0 @@
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\gendeals\bin\Release\GenDeals.exe.config
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\gendeals\bin\Release\GenDeals.exe
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\gendeals\bin\Release\GenDeals.pdb
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\gendeals\obj\Release\gendeals.csprojResolveAssemblyReference.cache
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\gendeals\obj\Release\GenDeals.exe
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\gendeals\obj\Release\GenDeals.pdb

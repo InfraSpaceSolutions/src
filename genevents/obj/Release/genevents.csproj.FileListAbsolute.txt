@@ -1,6 +1,0 @@
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genevents\bin\Release\GenEvents.exe.config
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genevents\bin\Release\GenEvents.exe
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genevents\bin\Release\GenEvents.pdb
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genevents\obj\Release\genevents.csprojResolveAssemblyReference.cache
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genevents\obj\Release\GenEvents.exe
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genevents\obj\Release\GenEvents.pdb

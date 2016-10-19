@@ -1,6 +1,0 @@
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genprox\bin\Release\GenProx.exe.config
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genprox\bin\Release\GenProx.exe
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genprox\bin\Release\GenProx.pdb
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genprox\obj\Release\genprox.csprojResolveAssemblyReference.cache
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genprox\obj\Release\GenProx.exe
-C:\Users\Jaigugan\Desktop\UTC_SYSTEM_ARCHIVE\UTC_SYSTEM_ARCHIVE\src\genprox\obj\Release\GenProx.pdb

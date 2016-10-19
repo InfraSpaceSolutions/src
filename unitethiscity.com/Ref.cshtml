@@ -1,9 +1,0 @@
-﻿@{
-    Layout = null;
-    
-    // create and assign a referral cookie
-    Referrals.AssignReferral(WebConvert.ToString(Request.QueryString["code"], ""));
-    // send the user to the join page
-    Response.Redirect( Href( "~/JoinUs" ), false );
-    return;
-}

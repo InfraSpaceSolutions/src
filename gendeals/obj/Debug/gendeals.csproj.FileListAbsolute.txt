@@ -1,6 +1,0 @@
-C:\Users\mterry\git\utc\src\gendeals\bin\Debug\GenDeals.exe.config
-C:\Users\mterry\git\utc\src\gendeals\bin\Debug\GenDeals.exe
-C:\Users\mterry\git\utc\src\gendeals\bin\Debug\GenDeals.pdb
-C:\Users\mterry\git\utc\src\gendeals\obj\Debug\GenDeals.exe
-C:\Users\mterry\git\utc\src\gendeals\obj\Debug\GenDeals.pdb
-C:\Users\mterry\git\utc\src\gendeals\obj\Debug\gendeals.csprojResolveAssemblyReference.cache
